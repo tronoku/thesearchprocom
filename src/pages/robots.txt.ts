@@ -6,7 +6,7 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-Sitemap: ${import.meta.env.PUBLIC_SITE_URL}/sitemap.xml
+Sitemap: https://thesearchpro.com/sitemap.xml
 `.trim();
 
 export const GET: APIRoute = () => {
