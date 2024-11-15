@@ -4,7 +4,7 @@ import ContactForm from '../components/forms/ContactForm.astro';
 import { generateServiceSchema } from '../utils/structuredData';
 import Breadcrumbs from '../components/common/Breadcrumbs.astro';
 import { mainBreadcrumbs } from '../utils/breadcrumbs';
-import ServiceHero from '../components/services/ServiceHero.astro';
+import OptimizedHero from '../components/common/OptimizedHero.astro';
 
 const schema = generateServiceSchema({
   name: "Contact TheSearchPro",
@@ -27,31 +27,11 @@ const BASE_URL = import.meta.env.BASE_URL || '';
     </div>
   </div>
 
-  <!-- Hero Section -->
-  <section 
-    class="relative bg-gray-900 text-white py-32"
-    style={{
-      backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('/images/heroes/contact.jpg')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      height: 'auto',
-      minHeight: '400px'
-    }}
-    role="banner"
-    aria-label="Contact hero section"
-  >
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="max-w-3xl">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          Let's Grow Your<br/>Business Together
-        </h1>
-        <p class="text-xl text-gray-300">
-          Ready to take your online presence to the next level?<br/>
-          Our team is here to help.
-        </p>
-      </div>
-    </div>
-  </section>
+  <OptimizedHero
+    title="Let's Grow Your Business Together"
+    description="Ready to take your online presence to the next level? Our team is here to help."
+    backgroundImage="/images/heroes/contact.jpg"
+  />
 
   <!-- Contact Form Section -->
   <section class="py-16 bg-white">
@@ -77,8 +57,9 @@ const BASE_URL = import.meta.env.BASE_URL || '';
             <div>
               <h3 class="text-lg font-semibold mb-2">Hours</h3>
               <p class="text-gray-600">Monday - Friday: 9am - 5pm PST</p>
+            </div>
           </div>
-
+        </div>
         
         <div class="bg-gray-50 p-8 rounded-lg">
           <img 
@@ -121,39 +102,26 @@ const BASE_URL = import.meta.env.BASE_URL || '';
     </div>
   </section>
 
-  <!-- Why Choose Us Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Why Partner With Us?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">Fast Response Time</h3>
-          <p class="text-gray-600">We respond to all inquiries within 24 hours, ensuring you get the support you need quickly.</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">Proven Results</h3>
-          <p class="text-gray-600">Our strategies have helped hundreds of businesses achieve their digital marketing goals.</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">Dedicated Team</h3>
-          <p class="text-gray-600">Work with experienced professionals who are passionate about your success.</p>
-        </div>
-      </div>
+  <!-- Newsletter Section -->
+  <section class="py-16 bg-blue-50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+      <p class="text-gray-600 mb-8">Subscribe to our newsletter for digital marketing tips, industry news, and exclusive offers.</p>
+      <form class="max-w-md mx-auto flex gap-4" id="newsletter-form">
+        <input 
+          type="email" 
+          placeholder="Enter your email" 
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+        >
+        <button 
+          type="submit" 
+          class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <span class="inline-block">Subscribe</span>
+        </button>
+      </form>
     </div>
   </section>
 
@@ -181,7 +149,6 @@ const BASE_URL = import.meta.env.BASE_URL || '';
           </div>
         </div>
         <div class="h-[300px] bg-gray-200 rounded-lg">
-          <!-- Replace with your preferred map implementation -->
           <div class="w-full h-full rounded-lg overflow-hidden">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.2891728925904!2d-122.3351894!3d47.6062095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab6b122572d%3A0x4cc65f51348e1d43!2sDowntown%20Seattle%2C%20Seattle%2C%20WA!5e0!3m2!1sen!2sus!4v1648706673478!5m2!1sen!2sus"
@@ -195,30 +162,6 @@ const BASE_URL = import.meta.env.BASE_URL || '';
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Newsletter Section -->
-  <section class="py-16 bg-blue-50">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
-      <p class="text-gray-600 mb-8">Subscribe to our newsletter for digital marketing tips, industry news, and exclusive offers.</p>
-      <form class="max-w-md mx-auto flex gap-4" id="newsletter-form">
-        <input 
-          type="email" 
-          placeholder="Enter your email" 
-          required
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-        >
-        <button 
-          type="submit" 
-          class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          disabled={loading}
-        >
-          <span class="inline-block">Subscribe</span>
-        </button>
-      </form>
     </div>
   </section>
 </Layout> 
