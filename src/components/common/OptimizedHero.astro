@@ -70,7 +70,7 @@ try {
 ---
 
 <section 
-  class={`relative bg-gray-900 text-white py-32 ${className}`}
+  class={`relative bg-secondary text-white py-32 ${className}`}
   data-hero
 >
   <div class="absolute inset-0 overflow-hidden">
@@ -82,22 +82,10 @@ try {
       />
     )}
     
-    <!-- Hidden image to trigger load event -->
-    <img 
-      src={backgroundImage}
-      alt=""
-      class="hidden"
-      data-hero-image
-    />
-    
-    <!-- Background div -->
+    <!-- Background div with gradient overlay -->
     <div 
       class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
-      style={{
-        backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${backgroundImage}')`,
-        opacity: 0
-      }}
-      data-hero-bg
+      style={`background-image: linear-gradient(to right, rgba(27, 80, 131, 0.95), rgba(27, 80, 131, 0.75)), url('${backgroundImage}');`}
     />
   </div>
 
@@ -136,34 +124,16 @@ try {
     ctx.putImageData(imageData, 0, 0);
   }
 
-  // Initialize hero sections
-  function initHero(heroSection: Element) {
-    const placeholder = heroSection.querySelector('[data-placeholder]');
-    const heroImage = heroSection.querySelector('[data-hero-image]') as HTMLImageElement;
-    const heroBg = heroSection.querySelector('[data-hero-bg]');
-    
-    if (!placeholder || !heroImage || !heroBg) return;
-
+  // Find all blurhash placeholders and render them
+  document.querySelectorAll('[data-placeholder]').forEach((placeholder) => {
     const blurhash = placeholder.getAttribute('data-blurhash');
     if (!blurhash) return;
 
-    // Render blurhash
     const canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
     placeholder.appendChild(canvas);
+
     renderBlurhash(blurhash, 32, 32, canvas);
-
-    // Handle image load
-    heroImage.onload = () => {
-      heroBg.setAttribute('style', `
-        background-image: linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${heroImage.src}');
-        opacity: 1;
-      `);
-      placeholder.setAttribute('style', 'opacity: 0;');
-    };
-  }
-
-  // Initialize all hero sections
-  document.querySelectorAll('[data-hero]').forEach(initHero);
+  });
 </script> 
