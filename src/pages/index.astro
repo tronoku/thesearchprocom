@@ -1,19 +1,212 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/ui/Card.astro';
+import Stats from '../components/common/Stats.astro';
+
+const keyStats = [
+  {
+    value: "100",
+    label: "billion Google searches happen every month."
+  },
+  {
+    value: "97%",
+    label: "of consumers search online for local businesses"
+  },
+  {
+    value: "75%",
+    label: "of these consumers stop at page 1, are you there?"
+  }
+];
+
+const BASE_URL = import.meta.env.BASE_URL || '';
 ---
 
 <Layout 
-  title="Home"
-  description="Welcome to our digital marketing agency"
+  title="TheSearchPro - An SEO Company that Gets Results"
+  description="Do you know what's keeping your website from growing? Get an instant SEO Report now and find out!"
+  ogImage="/images/og-image.jpg"
   type="website"
 >
-  <main class="min-h-screen">
-    <section class="py-20 bg-gray-900 text-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">Welcome to Your Site</h1>
-        <p class="text-xl text-gray-300">Your digital marketing partner for growth.</p>
-      </div>
-    </section>
-    <!-- Add your home page content here -->
-  </main>
+	<main>
+		<!-- Hero Section -->
+		<section class="relative bg-gray-900 text-white py-20">
+			<div class="absolute inset-0 overflow-hidden">
+				<img 
+					src={`${BASE_URL}/images/heroes/home-data-analytics.jpg`}
+					alt=""
+					class="w-full h-full object-cover opacity-80"
+					loading="eager"
+				/>
+				<div class="absolute inset-0 bg-gray-900/60"></div>
+			</div>
+			<div class="relative max-w-6xl mx-auto px-4">
+				<h1 class="text-5xl font-bold mb-6">Your Business Deserves<br/>To Be Found Online.</h1>
+				<p class="text-xl mb-8">Every month, billions search for businesses like yours.<br/>Are you showing up where it matters?</p>
+				<a href="#get-quote" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-md font-semibold">
+					Get Your Free Quote
+				</a>
+			</div>
+		</section>
+
+		<!-- Stats Section -->
+		<section class="py-16 bg-white">
+			<div class="max-w-6xl mx-auto px-4">
+				<h2 class="text-3xl text-center mb-4">Online Business is <span class="font-bold">Big</span></h2>
+				<p class="text-center text-gray-600 mb-12">You need to be seen to succeed.</p>
+				<Stats stats={keyStats} />
+			</div>
+		</section>
+
+		<!-- What We Do Section -->
+		<section class="py-16 bg-white">
+			<div class="max-w-6xl mx-auto px-4">
+				<h2 class="text-3xl text-center mb-12">What We Do</h2>
+				<div class="max-w-3xl mx-auto">
+					<p class="text-gray-600 mb-6">
+						We transform your online presence through battle-tested strategies that deliver real results. From Fortune 500 companies to local businesses, we've helped organizations of all sizes multiply their digital growth and revenue.
+					</p>
+					<p class="text-gray-600 mb-6">
+						While others chase shortcuts, we focus on sustainable, long-term success. Our team stays ahead of industry changes through continuous research and testing, ensuring your business thrives in today's competitive digital landscape.
+					</p>
+					<p class="text-gray-600">
+						By handling the complex technical aspects of digital marketing, we free you to focus on what you do best - serving your customers and growing your business.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Formula for Success Section -->
+		<section class="py-16 bg-gray-50">
+			<div class="max-w-6xl mx-auto px-4">
+				<h2 class="text-3xl text-center mb-12">The Formula for Success</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div class="flex gap-4">
+						<div class="flex-shrink-0">
+							<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold mb-2">Custom-Crafted Strategies</h3>
+							<p class="text-gray-600">Every business is unique. We develop tailored solutions that align perfectly with your goals and market position.</p>
+						</div>
+					</div>
+					<div class="flex gap-4">
+						<div class="flex-shrink-0">
+							<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold mb-2">Data-Driven Targeting</h3>
+							<p class="text-gray-600">We identify and capture your ideal audience through advanced analytics and strategic optimization, turning visitors into valuable customers.</p>
+						</div>
+					</div>
+					<div class="flex gap-4">
+						<div class="flex-shrink-0">
+							<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold mb-2">Complete Transparency</h3>
+							<p class="text-gray-600">No black boxes here. We provide detailed reporting and insights so you always know exactly how your investment is driving growth.</p>
+						</div>
+					</div>
+					<div class="flex gap-4">
+						<div class="flex-shrink-0">
+							<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+							</svg>
+						</div>
+						<div>
+							<h3 class="text-xl font-bold mb-2">Dedicated Support</h3>
+							<p class="text-gray-600">Your success is our success. Our responsive team ensures you have the support and guidance needed to achieve your digital marketing goals.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Brand Logos Section -->
+		<section class="py-16 bg-white">
+			<div class="max-w-6xl mx-auto px-4">
+				<h2 class="text-2xl text-center mb-8">Trusted by Industry Leaders</h2>
+				<div class="flex flex-wrap justify-center items-center gap-12">
+					<div class="text-center">
+						<img 
+							src={`${BASE_URL}/images/clients/client-1.png`}
+							alt="Enterprise Client" 
+							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						>
+					</div>
+					<div class="text-center">
+						<img 
+							src={`${BASE_URL}/images/clients/client-2.png`}
+							alt="Retail Client" 
+							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						>
+					</div>
+					<div class="text-center">
+						<img 
+							src={`${BASE_URL}/images/clients/client-3.png`}
+							alt="Technology Client" 
+							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						>
+					</div>
+					<div class="text-center">
+						<img 
+							src={`${BASE_URL}/images/clients/client-4.png`}
+							alt="Service Industry Client" 
+							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Services Section -->
+		<section class="py-16 bg-gray-50">
+			<div class="max-w-6xl mx-auto px-4">
+				<h2 class="text-3xl text-center mb-12">The Search Pro Boosts Your Growth</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<Card
+						href="/services/seo/"
+						title="Search Engine Optimization"
+						body="Dominate search rankings with our proven SEO expertise. We combine technical mastery, strategic content, and authoritative link building to deliver sustainable organic growth."
+					/>
+					<Card
+						href="/services/ppc/"
+						title="Pay Per Click Marketing"
+						body="Transform clicks into customers with data-driven PPC campaigns. Our expert team optimizes every aspect of your paid search strategy to maximize ROI."
+					/>
+					<Card
+						href="/services/web-design/"
+						title="Web Design and Development"
+						body="Create stunning, conversion-focused websites that drive results. Our SEO-first approach ensures your site not only looks great but performs exceptionally."
+					/>
+					<Card
+						href="/services/social-media-marketing/"
+						title="Social Media Marketing"
+						body="Build a powerful brand presence across social platforms. We create engaging campaigns that turn followers into loyal customers and brand advocates."
+					/>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-16 bg-blue-600 text-white" id="get-quote">
+			<div class="max-w-4xl mx-auto px-4 text-center">
+				<h2 class="text-3xl font-bold mb-4">Ready to Grow Your Business?</h2>
+				<p class="mb-8">Get your free SEO analysis and quote today!</p>
+				<a href="/contact/" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100">
+					Get Your Free Quote
+				</a>
+			</div>
+		</section>
+	</main>
 </Layout>
