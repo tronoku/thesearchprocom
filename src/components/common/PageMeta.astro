@@ -27,7 +27,7 @@ const {
   siteUrl
 } = Astro.props;
 
-const fullTitle = `${title} - ${siteName}`;
+const fullTitle = `${siteName} - ${title}`;
 const canonicalURL = new URL(path, siteUrl).toString();
 const imageUrl = new URL(image.startsWith('/') ? image : `/${image}`, siteUrl).toString();
 ---
