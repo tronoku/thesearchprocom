@@ -6,7 +6,7 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-Sitemap: ${import.meta.env.SITE_URL}/sitemap.xml
+Sitemap: ${import.meta.env.PUBLIC_SITE_URL}/sitemap.xml
 `.trim();
 
 export const GET: APIRoute = () => {
