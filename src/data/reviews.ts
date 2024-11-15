@@ -1,6 +1,6 @@
 export const seoReviews = {
   serviceName: "Search Engine Optimization",
-  serviceUrl: "/services/seo",
+  serviceUrl: "/services/seo/",
   aggregateRating: {
     ratingValue: 4.9,
     reviewCount: 127
@@ -29,7 +29,7 @@ export const seoReviews = {
 
 export const ppcReviews = {
   serviceName: "Pay Per Click Marketing",
-  serviceUrl: "/services/ppc",
+  serviceUrl: "/services/ppc/",
   aggregateRating: {
     ratingValue: 4.8,
     reviewCount: 98
@@ -58,7 +58,7 @@ export const ppcReviews = {
 
 export const webDesignReviews = {
   serviceName: "Web Design & Development",
-  serviceUrl: "/services/web-design",
+  serviceUrl: "/services/web-design/",
   aggregateRating: {
     ratingValue: 4.9,
     reviewCount: 84
@@ -81,7 +81,7 @@ export const webDesignReviews = {
 
 export const socialMediaReviews = {
   serviceName: "Social Media Marketing",
-  serviceUrl: "/services/social-media-marketing",
+  serviceUrl: "/services/social-media-marketing/",
   aggregateRating: {
     ratingValue: 4.8,
     reviewCount: 76
@@ -104,7 +104,7 @@ export const socialMediaReviews = {
 
 export const analyticsReviews = {
   serviceName: "Web Analytics",
-  serviceUrl: "/services/web-analytics",
+  serviceUrl: "/services/web-analytics/",
   aggregateRating: {
     ratingValue: 4.9,
     reviewCount: 52
@@ -127,7 +127,7 @@ export const analyticsReviews = {
 
 export const localSearchReviews = {
   serviceName: "Local Search Strategy",
-  serviceUrl: "/services/local-search",
+  serviceUrl: "/services/local-search/",
   aggregateRating: {
     ratingValue: 4.8,
     reviewCount: 63

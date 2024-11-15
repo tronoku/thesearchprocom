@@ -20,5 +20,9 @@ export default defineConfig({
         script-src 'self' 'unsafe-inline' 'unsafe-eval';
       `.replace(/\s+/g, ' ').trim()
     }
+  },
+  trailingSlash: 'always',
+  build: {
+    format: 'directory'
   }
 });
