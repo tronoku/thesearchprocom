@@ -17,6 +17,8 @@ const keyStats = [
     label: "of these consumers stop at page 1, are you there?"
   }
 ];
+
+const BASE_URL = import.meta.env.BASE_URL || '';
 ---
 
 <Layout 
@@ -28,7 +30,16 @@ const keyStats = [
 	<main>
 		<!-- Hero Section -->
 		<section class="relative bg-gray-900 text-white py-20">
-			<div class="max-w-6xl mx-auto px-4">
+			<div class="absolute inset-0 overflow-hidden">
+				<img 
+					src={`${BASE_URL}/images/heroes/home-data-analytics.jpg`}
+					alt=""
+					class="w-full h-full object-cover opacity-80"
+					loading="eager"
+				/>
+				<div class="absolute inset-0 bg-gray-900/60"></div>
+			</div>
+			<div class="relative max-w-6xl mx-auto px-4">
 				<h1 class="text-5xl font-bold mb-6">Your Business Deserves<br/>To Be Found Online.</h1>
 				<p class="text-xl mb-8">Every month, billions search for businesses like yours.<br/>Are you showing up where it matters?</p>
 				<a href="#get-quote" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-md font-semibold">
@@ -124,7 +135,7 @@ const keyStats = [
 				<div class="flex flex-wrap justify-center items-center gap-12">
 					<div class="text-center">
 						<img 
-							src="/images/clients/client-1.png" 
+							src={`${BASE_URL}/images/clients/client-1.png`}
 							alt="Enterprise Client" 
 							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
 							loading="lazy"
@@ -132,7 +143,7 @@ const keyStats = [
 					</div>
 					<div class="text-center">
 						<img 
-							src="/images/clients/client-2.png" 
+							src={`${BASE_URL}/images/clients/client-2.png`}
 							alt="Retail Client" 
 							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
 							loading="lazy"
@@ -140,7 +151,7 @@ const keyStats = [
 					</div>
 					<div class="text-center">
 						<img 
-							src="/images/clients/client-3.png" 
+							src={`${BASE_URL}/images/clients/client-3.png`}
 							alt="Technology Client" 
 							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
 							loading="lazy"
@@ -148,7 +159,7 @@ const keyStats = [
 					</div>
 					<div class="text-center">
 						<img 
-							src="/images/clients/client-4.png" 
+							src={`${BASE_URL}/images/clients/client-4.png`}
 							alt="Service Industry Client" 
 							class="h-12 w-auto grayscale hover:grayscale-0 transition-all"
 							loading="lazy"

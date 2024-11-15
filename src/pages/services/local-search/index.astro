@@ -11,6 +11,8 @@ import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
 import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
 import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
+const BASE_URL = import.meta.env.BASE_URL || '';
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -136,14 +138,14 @@ const service = {
   description="Improve your local search visibility and attract more customers in your area. Expert local SEO services for businesses."
   type="service"
   schema={schema}
-  ogImage="/images/services/local-search-hero.svg"
+  ogImage={`${BASE_URL}/images/heroes/local-search.jpg`}
 >
   <Breadcrumbs items={serviceBreadcrumbs.localSearch} />
   
   <ServiceHero
     title="Local Search Strategy"
     description="Get found by customers in your area with local SEO strategies that drive foot traffic and phone calls."
-    icon="/images/services/local-search-hero.svg"
+    icon={`${BASE_URL}/images/heroes/local-search.jpg`}
   />
   
   <ServiceFeatures features={features} />

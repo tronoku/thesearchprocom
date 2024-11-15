@@ -11,6 +11,8 @@ import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
 import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
 import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
+const BASE_URL = import.meta.env.BASE_URL || '';
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -22,6 +24,135 @@ const schema = {
     generateBreadcrumbSchema(serviceBreadcrumbs.brandMarketing)
   ]
 };
+
+const features = [
+  {
+    title: "Brand Strategy",
+    description: "Develop a unique brand identity that resonates with your target audience.",
+    icon: "/images/services/icons/brand-strategy.svg"
+  },
+  {
+    title: "Brand Messaging",
+    description: "Create compelling brand messaging that communicates your value proposition.",
+    icon: "/images/services/icons/messaging.svg"
+  },
+  {
+    title: "Brand Design",
+    description: "Design visual elements that reflect your brand's personality and values.",
+    icon: "/images/services/icons/design.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Brand Analysis",
+    description: "We analyze your current brand position and market opportunities."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a comprehensive brand strategy aligned with your goals."
+  },
+  {
+    number: 3,
+    title: "Implementation",
+    description: "We execute the strategy across all brand touchpoints."
+  },
+  {
+    number: 4,
+    title: "Monitoring & Refinement",
+    description: "We track brand performance and refine our approach."
+  }
+];
+
+const results = {
+  title: "Brand Marketing Impact",
+  subtitle: "Our brand marketing services deliver measurable results",
+  stats: [
+    {
+      value: "185%",
+      label: "Increase in Brand Recognition"
+    },
+    {
+      value: "165%",
+      label: "Growth in Brand Engagement"
+    },
+    {
+      value: "2.4x",
+      label: "Increase in Brand Value"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Brand Essentials",
+    price: "$2,499",
+    description: "For small businesses",
+    features: [
+      "Brand Strategy",
+      "Logo Design",
+      "Brand Guidelines",
+      "Messaging Framework",
+      "Social Media Templates",
+      "Basic Brand Assets"
+    ]
+  },
+  {
+    name: "Brand Growth",
+    price: "$4,999",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Essentials",
+      "Advanced Brand Strategy",
+      "Full Visual Identity",
+      "Content Strategy",
+      "Brand Voice Guide",
+      "Marketing Collateral",
+      "Brand Training"
+    ]
+  },
+  {
+    name: "Brand Enterprise",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Everything in Growth",
+      "Global Brand Strategy",
+      "Sub-brand Development",
+      "Brand Architecture",
+      "Brand Workshops",
+      "Ongoing Consulting",
+      "Brand Monitoring"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "How long does brand development take?",
+    answer: "Brand development typically takes 6-12 weeks, depending on the scope. This includes research, strategy development, design, and implementation planning."
+  },
+  {
+    question: "Do you help with existing brands?",
+    answer: "Yes, we work with both new and existing brands. We can help refresh your current brand or completely reposition it based on your goals."
+  },
+  {
+    question: "What deliverables do we receive?",
+    answer: "Deliverables vary by package but typically include brand strategy documentation, visual identity files, brand guidelines, and implementation resources."
+  },
+  {
+    question: "How do you measure brand success?",
+    answer: "We track metrics including brand awareness, recognition, sentiment, engagement, and market share. We provide regular reports showing the impact of our brand efforts."
+  }
+];
+
+const service = {
+  name: "Brand Marketing",
+  action: "Build Your Brand"
+};
 ---
 
 <Layout 
@@ -29,7 +160,29 @@ const schema = {
   description="Build a powerful brand identity and increase your market presence. Strategic brand marketing services that drive growth."
   type="service"
   schema={schema}
-  ogImage="/images/services/brand-marketing-hero.svg"
+  ogImage={`${BASE_URL}/images/heroes/brand-marketing.jpg`}
 >
-  <!-- Content -->
+  <Breadcrumbs items={serviceBreadcrumbs.brandMarketing} />
+  
+  <ServiceHero
+    title="Brand Marketing"
+    description="Build a powerful brand that resonates with your audience and drives business growth. Strategic brand development that sets you apart."
+    icon={`${BASE_URL}/images/heroes/brand-marketing.jpg`}
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
 </Layout> 

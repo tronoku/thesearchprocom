@@ -1,12 +1,156 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { generateServiceSchema } from '../../../utils/structuredData';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
-const schema = generateServiceSchema({
-  name: "PPC Management Services",
-  description: "Drive targeted traffic and conversions with our expert PPC management services.",
-  url: "/services/ppc"
-});
+const BASE_URL = import.meta.env.BASE_URL || '';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "PPC Management Services",
+      description: "Drive targeted traffic and conversions with our expert PPC management services.",
+      url: "/services/ppc"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.ppc)
+  ]
+};
+
+const features = [
+  {
+    title: "Campaign Strategy",
+    description: "Custom PPC strategies designed to maximize your ROI and reach your target audience.",
+    icon: "/images/services/icons/strategy.svg"
+  },
+  {
+    title: "Conversion Optimization",
+    description: "Continuous optimization to improve conversion rates and reduce cost per acquisition.",
+    icon: "/images/services/icons/conversion.svg"
+  },
+  {
+    title: "Advanced Targeting",
+    description: "Precise audience targeting across search, display, and social platforms.",
+    icon: "/images/services/icons/targeting.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Account Analysis",
+    description: "We analyze your current PPC performance and identify opportunities for improvement."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a custom PPC strategy aligned with your goals and budget."
+  },
+  {
+    number: 3,
+    title: "Campaign Launch",
+    description: "We set up and launch optimized campaigns across relevant platforms."
+  },
+  {
+    number: 4,
+    title: "Optimization & Scaling",
+    description: "We continuously optimize campaigns and scale what works."
+  }
+];
+
+const results = {
+  title: "PPC Impact",
+  subtitle: "Our PPC services deliver measurable results",
+  stats: [
+    {
+      value: "45%",
+      label: "Average Reduction in Cost per Conversion"
+    },
+    {
+      value: "85%",
+      label: "Increase in Quality Score"
+    },
+    {
+      value: "3x",
+      label: "Average Return on Ad Spend"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Starter PPC",
+    price: "$999/mo",
+    description: "For small businesses",
+    features: [
+      "Campaign Setup",
+      "Keyword Research",
+      "Ad Copywriting",
+      "Monthly Optimization",
+      "Performance Reporting",
+      "Up to $5k Monthly Ad Spend"
+    ]
+  },
+  {
+    name: "Professional PPC",
+    price: "$1,999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Starter",
+      "Advanced Targeting",
+      "Landing Page Optimization",
+      "A/B Testing",
+      "Weekly Optimization",
+      "Up to $25k Monthly Ad Spend"
+    ]
+  },
+  {
+    name: "Enterprise PPC",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Everything in Professional",
+      "Custom Strategy",
+      "Multiple Platforms",
+      "Advanced Analytics",
+      "Dedicated Manager",
+      "Unlimited Ad Spend"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "How quickly will we see results?",
+    answer: "PPC campaigns can start driving traffic immediately, but it typically takes 2-4 weeks to optimize campaigns for best performance as we gather data and refine targeting."
+  },
+  {
+    question: "What platforms do you work with?",
+    answer: "We manage campaigns across Google Ads, Microsoft Ads, Facebook/Instagram Ads, LinkedIn Ads, and other platforms relevant to your target audience."
+  },
+  {
+    question: "How do you measure success?",
+    answer: "We track key metrics including ROAS, conversion rate, cost per acquisition, and quality score. We provide detailed reports showing the impact of our optimizations."
+  },
+  {
+    question: "What's included in your management fee?",
+    answer: "Our fee includes strategy development, campaign setup, ongoing optimization, ad copywriting, landing page recommendations, and regular performance reporting."
+  }
+];
+
+const service = {
+  name: "PPC",
+  action: "Maximize Your Ad Spend"
+};
 ---
 
 <Layout 
@@ -14,6 +158,29 @@ const schema = generateServiceSchema({
   description="Drive targeted traffic and conversions with our expert PPC management services. Get measurable results and maximize your ad spend."
   type="service"
   schema={schema}
+  ogImage={`${BASE_URL}/images/heroes/ppc.jpg`}
 >
-  <!-- Content -->
+  <Breadcrumbs items={serviceBreadcrumbs.ppc} />
+  
+  <ServiceHero
+    title="Pay Per Click Marketing"
+    description="Drive targeted traffic to your website through strategic PPC campaigns. Get measurable results and maximize your ROI."
+    icon={`${BASE_URL}/images/heroes/ppc.jpg`}
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
 </Layout> 

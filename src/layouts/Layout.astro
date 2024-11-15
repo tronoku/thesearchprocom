@@ -16,7 +16,7 @@ interface Props {
 
 const SITE_NAME = 'TheSearchPro';
 const SITE_URL = import.meta.env.SITE_URL || 'https://thesearchpro.com';
-const BASE_URL = import.meta.env.BASE_URL || '/';
+const BASE_URL = import.meta.env.BASE_URL || '';
 
 const { 
 	title, 
@@ -36,7 +36,7 @@ const seoMeta = {
 	title,
 	description,
 	type,
-	image: ogImage,
+	image: `${BASE_URL}${ogImage}`,
 	path,
 	publishedTime,
 	modifiedTime,
@@ -50,7 +50,16 @@ const seoMeta = {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={`${BASE_URL}/favicon.svg`} />
+		<link rel="icon" type="image/svg+xml" href={`${BASE_URL}/favicon.svg`.replace('//', '/')} />
+		
+		<!-- Content Security Policy -->
+		<meta http-equiv="Content-Security-Policy" content="
+			default-src 'self';
+			img-src 'self' data: https: http:;
+			style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+			font-src 'self' https://fonts.gstatic.com;
+			script-src 'self' 'unsafe-inline' 'unsafe-eval';
+		">
 		
 		<!-- Material Icons -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

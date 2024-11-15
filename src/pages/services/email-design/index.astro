@@ -11,6 +11,8 @@ import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
 import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
 import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
+const BASE_URL = import.meta.env.BASE_URL || '';
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -155,14 +157,14 @@ const service = {
   description="Create email campaigns that engage and convert. Get professional email templates that drive results."
   type="service"
   schema={schema}
-  ogImage="/images/services/email-design-hero.svg"
+  ogImage={`${BASE_URL}/images/heroes/email-design.jpg`}
 >
   <Breadcrumbs items={serviceBreadcrumbs.emailDesign} />
   
   <ServiceHero
     title="Custom Email Design"
     description="Create email campaigns that engage and convert. Get professional email templates that drive results."
-    icon="/images/services/email-hero.svg"
+    icon={`${BASE_URL}/images/heroes/email-design.jpg`}
   />
   
   <ServiceFeatures features={features} />

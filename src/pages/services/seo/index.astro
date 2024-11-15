@@ -1,12 +1,158 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { generateServiceSchema } from '../../../utils/structuredData';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
-const schema = generateServiceSchema({
-  name: "SEO Services",
-  description: "Professional SEO services to improve your search rankings and drive organic traffic.",
-  url: "/services/seo"
-});
+const BASE_URL = import.meta.env.BASE_URL || '';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "SEO Services",
+      description: "Boost your website's rankings with our proven SEO strategies and expert analysis.",
+      url: "/services/seo"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.seo)
+  ]
+};
+
+const features = [
+  {
+    title: "Technical SEO",
+    description: "Optimize your website's technical foundation for better search engine visibility.",
+    icon: "/images/services/icons/technical-seo.svg"
+  },
+  {
+    title: "Content Strategy",
+    description: "Create engaging, SEO-optimized content that ranks and converts.",
+    icon: "/images/services/icons/content.svg"
+  },
+  {
+    title: "Link Building",
+    description: "Build high-quality backlinks to boost your domain authority.",
+    icon: "/images/services/icons/link.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "SEO Audit",
+    description: "We analyze your current SEO performance and identify opportunities."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a custom SEO strategy based on your goals and market."
+  },
+  {
+    number: 3,
+    title: "Implementation",
+    description: "We execute the strategy with proven SEO techniques."
+  },
+  {
+    number: 4,
+    title: "Monitoring & Optimization",
+    description: "We track performance and continuously optimize for better results."
+  }
+];
+
+const results = {
+  title: "SEO Impact",
+  subtitle: "Our SEO services deliver measurable results",
+  stats: [
+    {
+      value: "285%",
+      label: "Average Increase in Organic Traffic"
+    },
+    {
+      value: "145%",
+      label: "More Qualified Leads"
+    },
+    {
+      value: "3.8x",
+      label: "Return on Investment"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Essential SEO",
+    price: "$1,499/mo",
+    description: "For small businesses",
+    features: [
+      "Keyword Research",
+      "On-Page Optimization",
+      "Technical SEO",
+      "Content Optimization",
+      "Monthly Reporting",
+      "Local SEO Setup"
+    ]
+  },
+  {
+    name: "Professional SEO",
+    price: "$2,999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Essential",
+      "Advanced Technical SEO",
+      "Content Creation",
+      "Link Building",
+      "Competitor Analysis",
+      "Weekly Updates",
+      "Priority Support"
+    ]
+  },
+  {
+    name: "Enterprise SEO",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Everything in Professional",
+      "Custom Strategy",
+      "International SEO",
+      "Advanced Analytics",
+      "API Integration",
+      "Dedicated SEO Team",
+      "24/7 Support"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "How long does SEO take to show results?",
+    answer: "While some improvements can be seen within the first few months, significant results typically take 4-6 months. SEO is a long-term strategy that builds sustainable organic traffic growth over time."
+  },
+  {
+    question: "What's included in your SEO services?",
+    answer: "Our SEO services include technical optimization, keyword research, content strategy, on-page optimization, link building, and regular performance reporting. We provide a comprehensive approach to improve your search visibility."
+  },
+  {
+    question: "Do you guarantee first page rankings?",
+    answer: "No reputable SEO company can guarantee specific rankings as search algorithms are complex and constantly changing. We focus on implementing proven strategies that improve your visibility and drive qualified traffic."
+  },
+  {
+    question: "How do you measure SEO success?",
+    answer: "We track key metrics including organic traffic growth, keyword rankings, conversion rates, and ROI. We provide regular reports showing the impact of our SEO efforts on your business goals."
+  }
+];
+
+const service = {
+  name: "SEO",
+  action: "Improve Your Search Rankings"
+};
 ---
 
 <Layout 
@@ -14,6 +160,33 @@ const schema = generateServiceSchema({
   description="Boost your website's rankings with our proven SEO strategies and expert analysis. Get more organic traffic and qualified leads."
   type="service"
   schema={schema}
+  ogImage={`${BASE_URL}/images/heroes/seo.jpg`}
 >
-  <!-- Content -->
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <Breadcrumbs items={serviceBreadcrumbs.seo} />
+    </div>
+  </div>
+  
+  <ServiceHero
+    title="Search Engine Optimization"
+    description="Get found online and boost your rankings with our proven SEO strategies. We help businesses like yours achieve sustainable organic growth."
+    icon={`${BASE_URL}/images/heroes/seo.jpg`}
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
 </Layout> 

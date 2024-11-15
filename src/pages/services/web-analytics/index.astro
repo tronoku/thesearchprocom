@@ -11,6 +11,8 @@ import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
 import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
 import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
+const BASE_URL = import.meta.env.BASE_URL || '';
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -155,14 +157,14 @@ const service = {
   description="Get comprehensive insights about your website's performance with our advanced web analytics services. Make data-driven decisions."
   type="service"
   schema={schema}
-  ogImage="/images/services/web-analytics-hero.svg"
+  ogImage={`${BASE_URL}/images/heroes/web-analytics.jpg`}
 >
   <Breadcrumbs items={serviceBreadcrumbs.webAnalytics} />
   
   <ServiceHero
     title="Advanced Web Analytics"
     description="Get comprehensive insights about your website's performance and visitor behavior. Make data-driven decisions to improve your online presence."
-    icon="/images/services/analytics-hero.svg"
+    icon={`${BASE_URL}/images/heroes/web-analytics.jpg`}
   />
   
   <ServiceFeatures features={features} />

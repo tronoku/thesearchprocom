@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { generateServiceSchema } from '../utils/structuredData';
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import { mainBreadcrumbs } from '../utils/breadcrumbs';
 
 const schema = generateServiceSchema({
   name: "About TheSearchPro",
@@ -15,8 +17,12 @@ const schema = generateServiceSchema({
   type="website"
   schema={schema}
 >
-  <main>
-    <!-- Hero Section -->
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={mainBreadcrumbs.about} />
+    </div>
+  </div>
+ <!-- Hero Section -->
     <section class="pt-32 pb-16 bg-gray-900 text-white">
       <div class="max-w-6xl mx-auto px-4">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">About TheSearchPro</h1>
@@ -25,6 +31,8 @@ const schema = generateServiceSchema({
         </p>
       </div>
     </section>
+  <main>
+   
 
     <!-- Mission Section -->
     <section class="py-16 bg-white">

@@ -1,12 +1,158 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { generateServiceSchema } from '../../../utils/structuredData';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
-const schema = generateServiceSchema({
-  name: "Social Media Marketing Services",
-  description: "Build your brand and engage with customers through strategic social media marketing.",
-  url: "/services/social-media-marketing"
-});
+const BASE_URL = import.meta.env.BASE_URL || '';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "Social Media Marketing Services",
+      description: "Build your brand and engage with customers through strategic social media marketing.",
+      url: "/services/social-media-marketing"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.socialMedia)
+  ]
+};
+
+const features = [
+  {
+    title: "Content Strategy",
+    description: "Create engaging content that resonates with your target audience and drives engagement.",
+    icon: "/images/services/icons/content-strategy.svg"
+  },
+  {
+    title: "Community Management",
+    description: "Build and nurture an engaged community around your brand.",
+    icon: "/images/services/icons/community.svg"
+  },
+  {
+    title: "Paid Social",
+    description: "Strategic paid campaigns to amplify your reach and drive conversions.",
+    icon: "/images/services/icons/paid-social.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Social Audit",
+    description: "We analyze your current social presence and identify opportunities."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a custom social media strategy aligned with your goals."
+  },
+  {
+    number: 3,
+    title: "Content Creation",
+    description: "We develop and publish engaging content across platforms."
+  },
+  {
+    number: 4,
+    title: "Growth & Optimization",
+    description: "We monitor performance and optimize for better engagement."
+  }
+];
+
+const results = {
+  title: "Social Media Impact",
+  subtitle: "Our social media services deliver measurable results",
+  stats: [
+    {
+      value: "245%",
+      label: "Average Increase in Engagement"
+    },
+    {
+      value: "185%",
+      label: "Growth in Followers"
+    },
+    {
+      value: "2.8x",
+      label: "Increase in Social Conversions"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Social Starter",
+    price: "$999/mo",
+    description: "For small businesses",
+    features: [
+      "3 Social Platforms",
+      "12 Posts per Month",
+      "Community Management",
+      "Monthly Reports",
+      "Basic Analytics",
+      "Content Calendar"
+    ]
+  },
+  {
+    name: "Social Growth",
+    price: "$1,999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "5 Social Platforms",
+      "24 Posts per Month",
+      "Advanced Analytics",
+      "Paid Social Management",
+      "Content Creation",
+      "Weekly Reports",
+      "Story Creation"
+    ]
+  },
+  {
+    name: "Social Enterprise",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Unlimited Platforms",
+      "Custom Post Volume",
+      "Advanced Strategy",
+      "Influencer Management",
+      "Crisis Management",
+      "24/7 Support",
+      "Custom Reporting"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "Which social platforms do you work with?",
+    answer: "We manage all major platforms including Facebook, Instagram, Twitter, LinkedIn, TikTok, and Pinterest. We'll recommend the best platforms for your business based on your target audience and goals."
+  },
+  {
+    question: "Do you create the content?",
+    answer: "Yes, we handle content creation including graphics, copywriting, and video content. We can also work with your existing brand assets and guidelines."
+  },
+  {
+    question: "How do you measure success?",
+    answer: "We track key metrics including engagement rate, follower growth, reach, impressions, and conversions. We provide detailed reports showing the impact of our social media efforts."
+  },
+  {
+    question: "Do you handle paid social advertising?",
+    answer: "Yes, we manage paid social campaigns across all platforms. This includes strategy, ad creation, targeting, optimization, and performance reporting."
+  }
+];
+
+const service = {
+  name: "Social Media",
+  action: "Grow Your Social Presence"
+};
 ---
 
 <Layout 
@@ -14,6 +160,29 @@ const schema = generateServiceSchema({
   description="Build your brand and engage with customers through strategic social media marketing. Get real results and grow your online presence."
   type="service"
   schema={schema}
+  ogImage={`${BASE_URL}/images/heroes/social.jpg`}
 >
-  <!-- Content -->
+  <Breadcrumbs items={serviceBreadcrumbs.socialMedia} />
+  
+  <ServiceHero
+    title="Social Media Marketing"
+    description="Build your brand and engage with customers through strategic social media marketing. Get real results and grow your online presence."
+    icon={`${BASE_URL}/images/heroes/social.jpg`}
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
 </Layout> 

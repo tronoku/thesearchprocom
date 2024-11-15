@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://thesearchpro.com',
-  base: '/',
+  base: '',
   integrations: [tailwind()],
   server: {
     headers: {
@@ -14,14 +14,10 @@ export default defineConfig({
       "X-XSS-Protection": "1; mode=block",
       "Content-Security-Policy": `
         default-src 'self';
-        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        img-src 'self' data: https: http:;
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        img-src 'self' data: https:;
         font-src 'self' https://fonts.gstatic.com;
-        connect-src 'self';
-        frame-ancestors 'none';
-        form-action 'self';
-        base-uri 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
       `.replace(/\s+/g, ' ').trim()
     }
   }
