@@ -22,6 +22,113 @@ const schema = {
     generateBreadcrumbSchema(serviceBreadcrumbs.localSearch)
   ]
 };
+
+const features = [
+  {
+    title: "Local SEO Strategy",
+    description: "Custom strategies to improve your visibility in local search results.",
+    icon: "/images/services/icons/local-seo.svg"
+  },
+  {
+    title: "Citation Building",
+    description: "Build and manage local citations to boost your local authority.",
+    icon: "/images/services/icons/citation.svg"
+  },
+  {
+    title: "Review Management",
+    description: "Monitor and manage your online reviews to improve local rankings.",
+    icon: "/images/services/icons/review.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Local Presence Audit",
+    description: "We analyze your current local presence and identify opportunities."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a custom local SEO strategy for your business."
+  },
+  {
+    number: 3,
+    title: "Implementation",
+    description: "We optimize your local presence across all important platforms."
+  },
+  {
+    number: 4,
+    title: "Monitoring & Optimization",
+    description: "We continuously monitor and improve your local rankings."
+  }
+];
+
+const pricing = [
+  {
+    name: "Local Starter",
+    price: "$499/mo",
+    description: "For single-location businesses",
+    features: [
+      "Local SEO Setup",
+      "Citation Building",
+      "Review Monitoring",
+      "Monthly Reporting",
+      "Basic GMB Optimization"
+    ]
+  },
+  {
+    name: "Local Pro",
+    price: "$999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Starter",
+      "Advanced GMB Optimization",
+      "Review Management",
+      "Competitor Analysis",
+      "Content Creation",
+      "Weekly Updates"
+    ]
+  },
+  {
+    name: "Local Enterprise",
+    price: "Custom",
+    description: "For multi-location businesses",
+    features: [
+      "Everything in Pro",
+      "Multi-Location Management",
+      "Custom Reporting",
+      "Priority Support",
+      "Strategy Consulting",
+      "Local Content Strategy"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "Why is local SEO important?",
+    answer: "Local SEO helps your business appear in local search results when potential customers are looking for services in your area. It's essential for brick-and-mortar businesses and service providers targeting specific geographic areas."
+  },
+  {
+    question: "How long does local SEO take?",
+    answer: "Initial improvements can be seen within 1-2 months, but significant results typically take 3-6 months as search engines process the optimizations and new citations."
+  },
+  {
+    question: "Do you work with multiple locations?",
+    answer: "Yes, we have specialized processes for managing multiple locations, ensuring consistency while optimizing each location for its specific market."
+  },
+  {
+    question: "What platforms do you optimize for?",
+    answer: "We optimize your presence across all major platforms including Google Business Profile, Bing Places, Apple Maps, and relevant industry directories."
+  }
+];
+
+const service = {
+  name: "Local Search",
+  action: "Dominate Local Search"
+};
 ---
 
 <Layout 
@@ -31,6 +138,8 @@ const schema = {
   schema={schema}
   ogImage="/images/services/local-search-hero.svg"
 >
+  <Breadcrumbs items={serviceBreadcrumbs.localSearch} />
+  
   <ServiceHero
     title="Local Search Strategy"
     description="Get found by customers in your area with local SEO strategies that drive foot traffic and phone calls."
@@ -41,39 +150,28 @@ const schema = {
   
   <ServiceProcess steps={process} />
 
-  <!-- Local Impact Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Local Search Impact</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <div class="text-4xl font-bold text-blue-600 mb-2">200%</div>
-          <p class="text-gray-600">Average Increase in Local Visibility</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <div class="text-4xl font-bold text-blue-600 mb-2">150%</div>
-          <p class="text-gray-600">More Phone Calls from Local Searches</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <div class="text-4xl font-bold text-blue-600 mb-2">4.8</div>
-          <p class="text-gray-600">Average Star Rating for Clients</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Results 
+    title="Local Search Impact"
+    subtitle="Our local SEO services deliver measurable results"
+    stats={[
+      {
+        value: "200%",
+        label: "Average Increase in Local Visibility"
+      },
+      {
+        value: "150%",
+        label: "More Phone Calls from Local Searches"
+      },
+      {
+        value: "4.8",
+        label: "Average Star Rating for Clients"
+      }
+    ]}
+  />
   
   <PricingTable tiers={pricing} />
   
   <FAQ faqs={faqs} />
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-blue-600 text-white">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4">Ready to Dominate Local Search?</h2>
-      <p class="mb-8">Get your free local presence audit and consultation today!</p>
-      <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100">
-        Get Your Free Local Audit
-      </a>
-    </div>
-  </section>
+  <ServiceCTA service={service} />
 </Layout> 
