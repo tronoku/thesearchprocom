@@ -175,15 +175,15 @@ const BASE_URL = import.meta.env.BASE_URL || '';
     -->
 
     <!-- Services Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-blue-600">
       <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">The Search Pro Boosts Your Growth</h2>
+        <h2 class="text-3xl font-bold text-center mb-12 text-white">The Search Pro Boosts Your Growth</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map(service => (
-            <div class="bg-gray-50 p-8 rounded-lg">
-              <h3 class="text-2xl font-bold mb-4">{service.title}</h3>
-              <p class="text-gray-600 mb-6">{service.description}</p>
-              <a href={service.link} class="text-blue-600 font-semibold hover:text-blue-700">
+            <div class="bg-blue-600 p-8 rounded-lg">
+              <h3 class="text-2xl font-bold mb-4 text-white">{service.title}</h3>
+              <p class="text-gray-300 mb-6">{service.description}</p>
+              <a href={service.link} class="text-blue-400 font-semibold hover:text-blue-300">
                 Learn More →
               </a>
             </div>
@@ -193,11 +193,11 @@ const BASE_URL = import.meta.env.BASE_URL || '';
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-blue-600 text-white">
+    <section class="py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to Grow Your Business?</h2>
-        <p class="mb-8">Get your free SEO analysis and quote today!</p>
-        <a href="/contact/" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100">
+        <h2 class="text-3xl font-bold mb-4 text-gray-900">Ready to Grow Your Business?</h2>
+        <p class="mb-8 text-gray-600">Get your free SEO analysis and quote today!</p>
+        <a href="/contact/" class="bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700">
           Get Your Free Quote
         </a>
       </div>
