@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import { mainBreadcrumbs } from '../utils/breadcrumbs';
 import { generateServiceSchema } from '../utils/structuredData';
 
 const schema = generateServiceSchema({
@@ -7,6 +9,11 @@ const schema = generateServiceSchema({
   description: "TheSearchPro's terms of service and conditions of use.",
   url: "/terms"
 });
+
+const breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: 'Terms of Service', href: '/terms' }
+];
 ---
 
 <Layout 
