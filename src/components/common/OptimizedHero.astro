@@ -71,13 +71,14 @@ try {
 
 <section 
   class={`relative bg-gray-900 text-white py-32 ${className}`}
+  data-hero
 >
   <div class="absolute inset-0 overflow-hidden">
     {blurhash && (
       <div 
-        class="absolute inset-0 blur-lg transform scale-110"
+        class="absolute inset-0 blur-lg transform scale-110 transition-opacity duration-500"
         data-blurhash={blurhash}
-        id="blurhash-placeholder"
+        data-placeholder
       />
     )}
     
@@ -86,17 +87,17 @@ try {
       src={backgroundImage}
       alt=""
       class="hidden"
-      onload="document.getElementById('hero-bg').style.opacity = '1'; document.getElementById('blurhash-placeholder').style.opacity = '0';"
+      data-hero-image
     />
     
     <!-- Background div -->
     <div 
-      id="hero-bg"
       class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
       style={{
         backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${backgroundImage}')`,
         opacity: 0
       }}
+      data-hero-bg
     />
   </div>
 
@@ -135,16 +136,34 @@ try {
     ctx.putImageData(imageData, 0, 0);
   }
 
-  // Find all blurhash placeholders and render them
-  document.querySelectorAll('#blurhash-placeholder').forEach((placeholder) => {
+  // Initialize hero sections
+  function initHero(heroSection: Element) {
+    const placeholder = heroSection.querySelector('[data-placeholder]');
+    const heroImage = heroSection.querySelector('[data-hero-image]') as HTMLImageElement;
+    const heroBg = heroSection.querySelector('[data-hero-bg]');
+    
+    if (!placeholder || !heroImage || !heroBg) return;
+
     const blurhash = placeholder.getAttribute('data-blurhash');
     if (!blurhash) return;
 
+    // Render blurhash
     const canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
     placeholder.appendChild(canvas);
-
     renderBlurhash(blurhash, 32, 32, canvas);
-  });
+
+    // Handle image load
+    heroImage.onload = () => {
+      heroBg.setAttribute('style', `
+        background-image: linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${heroImage.src}');
+        opacity: 1;
+      `);
+      placeholder.setAttribute('style', 'opacity: 0;');
+    };
+  }
+
+  // Initialize all hero sections
+  document.querySelectorAll('[data-hero]').forEach(initHero);
 </script> 
