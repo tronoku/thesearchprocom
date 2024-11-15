@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { generateServiceSchema } from '../utils/structuredData';
 import Breadcrumbs from '../components/common/Breadcrumbs.astro';
 import { mainBreadcrumbs } from '../utils/breadcrumbs';
+import ServiceHero from '../components/services/ServiceHero.astro';
 
 const schema = generateServiceSchema({
   name: "About TheSearchPro",
@@ -23,14 +24,11 @@ const schema = generateServiceSchema({
     </div>
   </div>
  <!-- Hero Section -->
-    <section class="pt-32 pb-16 bg-gray-900 text-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">About TheSearchPro</h1>
-        <p class="text-xl text-gray-300 max-w-2xl">
-          We're a team of digital marketing experts passionate about helping businesses grow their online presence.
-        </p>
-      </div>
-    </section>
+    <ServiceHero
+      title="About Us"
+      description="We're a team of digital marketing experts passionate about helping businesses succeed online. Learn more about our story and approach."
+      backgroundImage="/images/heroes/about.jpg"
+    />
   <main>
    
 
