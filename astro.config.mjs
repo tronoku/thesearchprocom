@@ -28,13 +28,13 @@ export default defineConfig({
         value: 'public, max-age=31536000, immutable'
       }
     ],
-    '/*.{jpg,jpeg,png,svg,gif}': [
+    '/*.{jpg,jpeg,png,gif,webp}': [
       {
         key: 'Cache-Control',
         value: 'public, max-age=31536000, immutable'
       }
     ],
-    '/fonts/*': [
+    '/images/heroes/*': [
       {
         key: 'Cache-Control',
         value: 'public, max-age=31536000, immutable'
