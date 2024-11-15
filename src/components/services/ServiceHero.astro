@@ -4,22 +4,24 @@ import HeroImage from '../common/HeroImage.astro';
 interface Props {
   title: string;
   description: string;
-  icon?: string;
+  backgroundImage: string;
 }
 
-const { title, description, icon } = Astro.props;
+const { title, description, backgroundImage } = Astro.props;
 ---
 
-<section class="pt-32 pb-16 bg-gray-900 text-white">
+<section 
+  class="relative pt-32 pb-24 min-h-[600px] flex items-center text-white"
+  style={`background-image: linear-gradient(to bottom, rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.95)), url(${backgroundImage}); background-size: cover; background-position: center;`}
+>
   <div class="max-w-6xl mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-        <p class="text-xl text-gray-300">{description}</p>
-      </div>
-      <div>
-        <HeroImage name={icon || 'default'} />
-      </div>
+    <div class="max-w-3xl">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+        {title}
+      </h1>
+      <p class="text-xl text-gray-300 leading-relaxed">
+        {description}
+      </p>
     </div>
   </div>
 </section> 
