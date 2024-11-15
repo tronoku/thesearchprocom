@@ -1,23 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/common/Breadcrumbs.astro';
-import { mainBreadcrumbs } from '../utils/breadcrumbs';
+import { generateServiceSchema } from '../utils/structuredData';
 
-const breadcrumbs = [
-  { text: 'Terms of Service' }
-];
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Terms of Service",
-  "description": "Terms of Service for TheSearchPro - Read our terms and conditions."
-};
+const schema = generateServiceSchema({
+  name: "Terms of Service",
+  description: "TheSearchPro's terms of service and conditions of use.",
+  url: "/terms"
+});
 ---
 
 <Layout 
-  title="Terms of Service - TheSearchPro"
-  description="Read our terms and conditions for using TheSearchPro's services."
+  title="Terms of Service"
+  description="Read TheSearchPro's terms of service and conditions of use."
+  type="website"
   schema={schema}
 >
   <main class="py-16">

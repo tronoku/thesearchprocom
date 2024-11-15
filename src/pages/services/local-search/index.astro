@@ -5,113 +5,31 @@ import ServiceFeatures from '../../../components/services/ServiceFeatures.astro'
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
 import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
 
-const features = [
-  {
-    title: "Local SEO",
-    description: "Optimize your business for local search results and Google Maps visibility.",
-    icon: "/images/services/icons/local-seo.svg"
-  },
-  {
-    title: "Citation Building",
-    description: "Create and manage business listings across all important local directories.",
-    icon: "/images/services/icons/citation.svg"
-  },
-  {
-    title: "Review Management",
-    description: "Monitor and manage your online reviews to build trust with local customers.",
-    icon: "/images/services/icons/reviews.svg"
-  }
-];
-
-const process = [
-  {
-    number: 1,
-    title: "Local Presence Audit",
-    description: "We analyze your current local presence and identify opportunities for improvement."
-  },
-  {
-    number: 2,
-    title: "Strategy Development",
-    description: "We create a customized local search strategy based on your market and competition."
-  },
-  {
-    number: 3,
-    title: "Optimization & Implementation",
-    description: "We optimize your local presence across Google Business Profile and local directories."
-  },
-  {
-    number: 4,
-    title: "Review & Reputation Management",
-    description: "We help manage and respond to reviews while building a positive local reputation."
-  }
-];
-
-const pricing = [
-  {
-    name: "Local Starter",
-    price: "$599/mo",
-    description: "For single-location businesses",
-    features: [
-      "Google Business Profile Optimization",
-      "Basic Citation Building",
-      "Local Keyword Optimization",
-      "Monthly Reporting",
-      "Review Monitoring"
-    ]
-  },
-  {
-    name: "Local Growth",
-    price: "$999/mo",
-    description: "For growing local businesses",
-    isPopular: true,
-    features: [
-      "Everything in Starter",
-      "Advanced Citation Building",
-      "Review Management",
-      "Local Content Strategy",
-      "Competitor Analysis",
-      "Weekly Updates"
-    ]
-  },
-  {
-    name: "Multi-Location",
-    price: "Custom",
-    description: "For businesses with multiple locations",
-    features: [
-      "Everything in Growth",
-      "Multi-Location Management",
-      "Franchise SEO",
-      "Custom Reporting",
-      "Priority Support",
-      "Strategy Consulting"
-    ]
-  }
-];
-
-const faqs = [
-  {
-    question: "Why is local search important?",
-    answer: "Local search is crucial for businesses targeting local customers. 46% of all Google searches have local intent, and 88% of consumers who do a local search on their smartphone visit or call a store within 24 hours."
-  },
-  {
-    question: "How long does it take to see results?",
-    answer: "While some improvements can be seen within weeks, significant results in local search typically take 3-6 months. This allows time for Google to recognize and trust your local presence."
-  },
-  {
-    question: "Do you handle review responses?",
-    answer: "Yes, we can help manage and respond to your reviews across various platforms. We'll help you maintain a positive online reputation and address any customer concerns professionally."
-  },
-  {
-    question: "What local directories do you work with?",
-    answer: "We work with all major local directories including Google Business Profile, Bing Places, Yelp, Yellow Pages, and industry-specific directories relevant to your business."
-  }
-];
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "Local Search Services",
+      description: "Improve your local search visibility and attract more customers in your area.",
+      url: "/services/local-search"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.localSearch)
+  ]
+};
 ---
 
 <Layout 
-  title="Local Search Strategy Services - TheSearchPro"
-  description="Get found by customers in your area with our proven local search strategies."
+  title="Local Search Services - Dominate Your Market"
+  description="Improve your local search visibility and attract more customers in your area. Expert local SEO services for businesses."
+  type="service"
+  schema={schema}
+  ogImage="/images/services/local-search-hero.svg"
 >
   <ServiceHero
     title="Local Search Strategy"

@@ -1,13 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { generateOrganizationSchema } from '../utils/structuredData';
+import { generateServiceSchema } from '../utils/structuredData';
 
-const schema = generateOrganizationSchema();
+const schema = generateServiceSchema({
+  name: "About TheSearchPro",
+  description: "Learn about our digital marketing expertise and commitment to client success.",
+  url: "/about"
+});
 ---
 
 <Layout 
-  title="About TheSearchPro - Your Digital Growth Partner"
-  description="Learn how TheSearchPro helps businesses grow through proven SEO and digital marketing strategies."
+  title="About Us - Digital Marketing Experts"
+  description="Learn how TheSearchPro helps businesses achieve sustainable growth through expert digital marketing strategies."
+  type="website"
   schema={schema}
 >
   <main>

@@ -15,7 +15,7 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     generateServiceSchema({
-      name: "Custom Email Design",
+      name: "Email Design Services",
       description: "Create email campaigns that engage and convert with our custom email design services.",
       url: "/services/email-design"
     }),
@@ -151,9 +151,11 @@ const service = {
 ---
 
 <Layout 
-  title="Custom Email Design Services - TheSearchPro"
-  description="Create email campaigns that engage and convert with our custom email design services."
+  title="Email Design Services"
+  description="Create email campaigns that engage and convert. Get professional email templates that drive results."
+  type="service"
   schema={schema}
+  ogImage="/images/services/email-design-hero.svg"
 >
   <Breadcrumbs items={serviceBreadcrumbs.emailDesign} />
   

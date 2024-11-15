@@ -4,65 +4,63 @@ import { generateSEOMeta } from '../../utils/seo';
 interface Props {
   title: string;
   description: string;
-  type?: 'website' | 'article' | 'service';
-  image?: string;
+  type: string;
+  image: string;
   path: string;
   publishedTime?: string;
   modifiedTime?: string;
-  schema?: object | object[];
+  schema?: Record<string, any>;
+  siteName: string;
+  siteUrl: string;
 }
 
 const { 
-  title,
-  description,
-  type = 'website',
-  image = '/images/og-image.jpg',
-  path,
-  publishedTime,
-  modifiedTime,
-  schema
-} = Astro.props;
-
-const seoMeta = generateSEOMeta({
   title,
   description,
   type,
   image,
   path,
   publishedTime,
-  modifiedTime
-});
+  modifiedTime,
+  schema,
+  siteName,
+  siteUrl
+} = Astro.props;
+
+const fullTitle = `${title} - ${siteName}`;
+const canonicalURL = new URL(path, siteUrl).toString();
+const imageUrl = new URL(image.startsWith('/') ? image : `/${image}`, siteUrl).toString();
 ---
 
 <!-- Primary Meta Tags -->
-<title>{seoMeta.title}</title>
-<meta name="title" content={seoMeta.title} />
-<meta name="description" content={seoMeta.description} />
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={seoMeta.canonical} />
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content={seoMeta.og.type} />
-<meta property="og:url" content={seoMeta.og.url} />
-<meta property="og:title" content={seoMeta.og.title} />
-<meta property="og:description" content={seoMeta.og.description} />
-<meta property="og:image" content={seoMeta.og.image} />
-<meta property="og:site_name" content={seoMeta.og.siteName} />
-{seoMeta.og.publishedTime && (
-  <meta property="article:published_time" content={seoMeta.og.publishedTime} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content={siteName} />
+{publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
 )}
-{seoMeta.og.modifiedTime && (
-  <meta property="article:modified_time" content={seoMeta.og.modifiedTime} />
+{modifiedTime && (
+  <meta property="article:modified_time" content={modifiedTime} />
 )}
 
 <!-- Twitter -->
-<meta name="twitter:card" content={seoMeta.twitter.card} />
-<meta name="twitter:url" content={seoMeta.twitter.url} />
-<meta name="twitter:title" content={seoMeta.twitter.title} />
-<meta name="twitter:description" content={seoMeta.twitter.description} />
-<meta name="twitter:image" content={seoMeta.twitter.image} />
-<meta name="twitter:site" content={seoMeta.twitter.site} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:site" content="@thesearchpro" />
 
 <!-- Structured Data -->
 {schema && (

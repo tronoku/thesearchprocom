@@ -15,7 +15,7 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     generateServiceSchema({
-      name: "Maps Search Optimization",
+      name: "Maps Optimization Services",
       description: "Optimize your presence on Google Maps and local directories to attract more local customers.",
       url: "/services/maps-optimization"
     }),
@@ -151,9 +151,11 @@ const service = {
 ---
 
 <Layout 
-  title="Maps Search Optimization Services - TheSearchPro"
-  description="Optimize your presence on Google Maps and local directories to attract more local customers."
+  title="Maps Optimization Services - Get Found Locally"
+  description="Optimize your presence on Google Maps and local directories to attract more local customers. Improve your local visibility."
+  type="service"
   schema={schema}
+  ogImage="/images/services/maps-optimization-hero.svg"
 >
   <Breadcrumbs items={serviceBreadcrumbs.mapsOptimization} />
   

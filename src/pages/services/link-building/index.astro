@@ -15,7 +15,7 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     generateServiceSchema({
-      name: "Link Building & PR",
+      name: "Link Building & PR Services",
       description: "Build authority with quality backlinks and strategic digital PR campaigns.",
       url: "/services/link-building"
     }),
@@ -151,9 +151,11 @@ const service = {
 ---
 
 <Layout 
-  title="Link Building & PR Services - TheSearchPro"
-  description="Build authority with quality backlinks and strategic digital PR campaigns."
+  title="Link Building & PR Services"
+  description="Build authority with quality backlinks and digital PR. Improve your rankings with strategic link building campaigns."
+  type="service"
   schema={schema}
+  ogImage="/images/services/link-building-hero.svg"
 >
   <Breadcrumbs items={serviceBreadcrumbs.linkBuilding} />
   

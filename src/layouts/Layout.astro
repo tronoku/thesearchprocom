@@ -8,17 +8,41 @@ interface Props {
 	title: string;
 	description: string;
 	ogImage?: string;
-	siteUrl?: string;
+	type?: 'website' | 'article' | 'service';
+	publishedTime?: string;
+	modifiedTime?: string;
+	schema?: Record<string, any>;
 }
+
+const SITE_NAME = 'TheSearchPro';
+const SITE_URL = import.meta.env.SITE_URL || 'https://thesearchpro.com';
+const BASE_URL = import.meta.env.BASE_URL || '/';
 
 const { 
 	title, 
 	description, 
 	ogImage = '/images/og-image.jpg',
-	siteUrl = 'https://thesearchpro.com'
+	type = 'website',
+	publishedTime,
+	modifiedTime,
+	schema = generateOrganizationSchema()
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
+const path = BASE_URL.length > 1 
+	? `${BASE_URL}${Astro.url.pathname}`.replace('//', '/') 
+	: Astro.url.pathname;
+
+const seoMeta = {
+	title,
+	description,
+	type,
+	image: ogImage,
+	path,
+	publishedTime,
+	modifiedTime,
+	siteName: SITE_NAME,
+	siteUrl: SITE_URL
+};
 ---
 
 <!doctype html>
@@ -26,42 +50,14 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		
-		<!-- Primary Meta Tags -->
-		<title>{title}</title>
-		<meta name="title" content={title} />
-		<meta name="description" content={description} />
-		
-		<!-- Canonical URL -->
-		<link rel="canonical" href={canonicalURL} />
-		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
-		
-		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content={canonicalURL} />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={new URL(ogImage, siteUrl).toString()} />
+		<link rel="icon" type="image/svg+xml" href={`${BASE_URL}/favicon.svg`} />
 		
 		<!-- Material Icons -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 		
 		<PageMeta
-			title={title}
-			description={description}
-			type={type}
-			image={image}
-			path={Astro.url.pathname}
-			publishedTime={publishedTime}
-			modifiedTime={modifiedTime}
+			{...seoMeta}
 			schema={schema}
 		/>
 	</head>
