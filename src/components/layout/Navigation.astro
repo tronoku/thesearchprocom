@@ -31,7 +31,7 @@ const links = [
 					<div class="relative group">
 						<a 
 							href={link.href}
-							class="text-gray-600 hover:text-primary font-medium py-8"
+							class="text-gray-600 hover:text-[rgb(56,171,241)] font-medium py-8"
 						>
 							{link.text}
 							{link.children && (
@@ -46,7 +46,7 @@ const links = [
 								{link.children.map(child => (
 									<a 
 										href={child.href}
-										class="block px-6 py-2 text-gray-600 hover:text-primary hover:bg-gray-50"
+										class="block px-6 py-2 text-gray-600 hover:text-[rgb(56,171,241)] hover:bg-gray-50"
 									>
 										{child.text}
 									</a>
@@ -58,13 +58,13 @@ const links = [
 
 				<a 
 					href="tel:+18005138069" 
-					class="text-secondary font-bold"
+					class="text-primary font-bold"
 				>
 					(800) 513-8069
 				</a>
 				<a 
 					href="/contact/"
-					class="bg-secondary text-white px-6 py-2 rounded-md hover:bg-secondary-600 transition-colors"
+					class="bg-[rgb(56,171,241)] text-white px-6 py-2 rounded-md hover:bg-[rgb(45,139,199)] transition-colors"
 				>
 					Free Quote
 				</a>
@@ -92,7 +92,7 @@ const links = [
 					<div class="space-y-2">
 						<a 
 							href={link.href}
-							class="block text-gray-600 hover:text-primary font-medium"
+							class="block text-gray-600 hover:text-[rgb(56,171,241)] font-medium"
 						>
 							{link.text}
 						</a>
@@ -101,7 +101,7 @@ const links = [
 								{link.children.map(child => (
 									<a 
 										href={child.href}
-										class="block text-gray-600 hover:text-primary"
+										class="block text-gray-600 hover:text-[rgb(56,171,241)]"
 									>
 										{child.text}
 									</a>
@@ -109,7 +109,7 @@ const links = [
 							</div>
 						)}
 					</div>
-				))}
+					))}
 			</nav>
 		</div>
 	</div>
