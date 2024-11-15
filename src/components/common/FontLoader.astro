@@ -1,0 +1,70 @@
+---
+// Preload critical fonts with optimized loading
+---
+
+<Fragment>
+  <!-- Preconnect to Google Fonts domain -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Load Material Icons with optimized loading strategy -->
+  <link 
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  
+  <link 
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+
+  <!-- Prevent FOUT -->
+  <style is:inline>
+    /* Minimal Material Icons styles to prevent layout shift */
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+    
+    .material-icons-outlined {
+      font-family: 'Material Icons Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+  </style>
+
+  <!-- Fallback -->
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </noscript>
+</Fragment> 

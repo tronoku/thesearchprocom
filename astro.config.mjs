@@ -5,24 +5,40 @@ export default defineConfig({
   site: 'https://thesearchpro.com',
   base: '',
   integrations: [tailwind()],
-  server: {
-    headers: {
-      "X-Frame-Options": "SAMEORIGIN",
-      "X-Content-Type-Options": "nosniff",
-      "Referrer-Policy": "strict-origin-when-cross-origin",
-      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-      "X-XSS-Protection": "1; mode=block",
-      "Content-Security-Policy": `
-        default-src 'self';
-        img-src 'self' data: https: http:;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
-        script-src 'self' 'unsafe-inline' 'unsafe-eval';
-      `.replace(/\s+/g, ' ').trim()
+  vite: {
+    build: {
+      assetsInlineLimit: 4096,
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'material-icons': ['@material-icons/font']
+          }
+        }
+      }
+    },
+    ssr: {
+      noExternal: ['@material-icons/font']
     }
   },
-  trailingSlash: 'always',
-  build: {
-    format: 'directory'
+  headers: {
+    '/*.{js,css}': [
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=31536000, immutable'
+      }
+    ],
+    '/*.{jpg,jpeg,png,svg,gif}': [
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=31536000, immutable'
+      }
+    ],
+    '/fonts/*': [
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=31536000, immutable'
+      }
+    ]
   }
 });

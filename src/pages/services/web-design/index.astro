@@ -1,12 +1,12 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
 import FAQ from '../../../components/services/FAQ.astro';
 import Results from '../../../components/common/Results.astro';
-import CTA from '../../../components/common/CTA.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
 import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
 import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
 import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
@@ -17,8 +17,8 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     generateServiceSchema({
-      name: "Web Design & Development",
-      description: "Get a custom website designed to convert visitors into customers with our expert web design services.",
+      name: "Web Design Services",
+      description: "Create a stunning, high-performance website that converts visitors into customers.",
       url: "/services/web-design/"
     }),
     generateBreadcrumbSchema(serviceBreadcrumbs.webDesign)
@@ -155,10 +155,15 @@ const faqs = [
   description="Get a custom website designed to convert visitors into customers with our expert web design services. SEO-friendly and conversion-focused designs."
   type="service"
   schema={schema}
-  ogImage={`${BASE_URL}/images/heroes/web-design.jpg`}
+  ogImage="/images/heroes/web-design.jpg"
 >
-  <Breadcrumbs items={serviceBreadcrumbs.webDesign} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.webDesign} />
+    </div>
+  </div>
   
+  <OptimizedHero
   <ServiceHero
     title="Web Design & Development"
     description="Create a stunning, high-performance website that converts visitors into customers. Our expert team builds beautiful, responsive websites that drive results."

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -162,9 +162,13 @@ const service = {
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/social.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.socialMedia} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.socialMedia} />
+    </div>
+  </div>
   
-  <ServiceHero
+  <OptimizedHero
     title="Social Media Marketing"
     description="Build your brand and engage your audience on social media. Our strategies help you grow your following and drive meaningful engagement."
     backgroundImage="/images/heroes/social-media.jpg"

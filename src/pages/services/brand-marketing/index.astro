@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -18,7 +18,7 @@ const schema = {
   "@graph": [
     generateServiceSchema({
       name: "Brand Marketing Services",
-      description: "Build a powerful brand identity and increase your market presence with our strategic brand marketing services.",
+      description: "Build a powerful brand identity and increase your market presence. Strategic brand marketing services that drive growth.",
       url: "/services/brand-marketing/"
     }),
     generateBreadcrumbSchema(serviceBreadcrumbs.brandMarketing)
@@ -162,9 +162,13 @@ const service = {
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/brand-marketing.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.brandMarketing} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.brandMarketing} />
+    </div>
+  </div>
   
-  <ServiceHero
+  <OptimizedHero
     title="Brand Marketing"
     description="Build a strong, memorable brand that resonates with your audience. Our strategies help you stand out and build lasting connections."
     backgroundImage="/images/heroes/brand-marketing.jpg"

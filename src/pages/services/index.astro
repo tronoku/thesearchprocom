@@ -1,113 +1,71 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import OptimizedHero from '../../components/common/OptimizedHero.astro';
 import Card from '../../components/ui/Card.astro';
-import Breadcrumbs from '../../components/common/Breadcrumbs.astro';
-import { mainBreadcrumbs } from '../../utils/breadcrumbs';
 import { generateServiceSchema } from '../../utils/structuredData';
 
 const schema = generateServiceSchema({
   name: "Digital Marketing Services",
-  description: "Professional digital marketing services including SEO, PPC, web design, and more.",
+  description: "Comprehensive digital marketing solutions to help your business grow online.",
   url: "/services/"
 });
 
 const services = [
   {
     title: "Search Engine Optimization",
-    description: "Dominate search rankings with our proven SEO expertise. We combine technical mastery, strategic content, and authoritative link building to deliver sustainable organic growth.",
+    description: "Improve your search rankings and drive organic traffic with our proven SEO strategies.",
     href: "/services/seo/",
-    icon: "/images/services/icons/seo.svg"
+    icon: "search"
   },
   {
-    title: "Pay Per Click Marketing",
-    description: "Transform clicks into customers with data-driven PPC campaigns. Our expert team optimizes every aspect of your paid search strategy to maximize ROI.",
+    title: "PPC Marketing",
+    description: "Drive targeted traffic and conversions with expertly managed paid advertising campaigns.",
     href: "/services/ppc/",
-    icon: "/images/services/icons/ppc.svg"
+    icon: "ads_click"
   },
-  {
-    title: "Web Design & Development",
-    description: "Create stunning, conversion-focused websites that drive results. Our SEO-first approach ensures your site not only looks great but performs exceptionally.",
-    href: "/services/web-design/",
-    icon: "/images/services/icons/web-design.svg"
-  },
-  {
-    title: "Social Media Marketing",
-    description: "Build a powerful brand presence across social platforms. We create engaging campaigns that turn followers into loyal customers and brand advocates.",
-    href: "/services/social-media-marketing/",
-    icon: "/images/services/icons/social-media.svg"
-  },
-  {
-    title: "Local Search Optimization",
-    description: "Dominate your local market with targeted local SEO strategies. Get found by customers in your area when they're ready to buy.",
-    href: "/services/local-search/",
-    icon: "/images/services/icons/local-search.svg"
-  },
-  {
-    title: "Web Analytics",
-    description: "Make data-driven decisions with comprehensive analytics insights. Track performance and optimize your digital marketing efforts.",
-    href: "/services/web-analytics/",
-    icon: "/images/services/icons/analytics.svg"
-  },
-  {
-    title: "Link Building & PR",
-    description: "Build authority with quality backlinks and strategic digital PR campaigns. Improve your rankings with proven link building strategies.",
-    href: "/services/link-building/",
-    icon: "/images/services/icons/link-building.svg"
-  },
-  {
-    title: "Brand Marketing",
-    description: "Develop a powerful brand identity that resonates with your target audience. Strategic brand development that sets you apart.",
-    href: "/services/brand-marketing/",
-    icon: "/images/services/icons/brand.svg"
-  }
+  // Add other services
 ];
 ---
+
 <Layout 
-  title="Full Service Marketing"
-  description="Accelerate your business growth with our comprehensive digital marketing solutions. From SEO to branding, we deliver results-driven strategies that transform your online presence."
-  type="service"
+  title="Digital Marketing Services"
+  description="Comprehensive digital marketing solutions to help your business grow online. From SEO to web design, we've got you covered."
+  type="website"
   schema={schema}
-  ogImage="/images/services/brand-marketing-hero.svg"
 >
-        <Breadcrumbs items={mainBreadcrumbs.services} />
-  
-  <!-- Hero Section -->
-    <section class="bg-gray-900 text-white">
-      <div class="max-w-6xl mx-auto px-4 py-16">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">Digital Marketing Services</h1>
-        <p class="text-xl text-gray-300 max-w-2xl">
-          Comprehensive digital marketing solutions to help your business grow online. From SEO to web design, we've got you covered.
-        </p>
-      </div>
-    </section>
-  <main>
-    
+  <OptimizedHero
+    title="Digital Marketing Services"
+    description="Comprehensive solutions to help your business grow online. From SEO to web design, we've got you covered."
+    backgroundImage="/images/heroes/services.jpg"
+  />
 
-    <!-- Services Grid -->
-    <section class="py-16">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map(service => (
-            <Card
-              href={service.href}
-              title={service.title}
-              body={service.description}
-              icon={service.icon}
-            />
-          ))}
-        </div>
+  <!-- Services Grid -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {services.map(service => (
+          <Card
+            href={service.href}
+            title={service.title}
+            body={service.description}
+            icon={service.icon}
+          />
+        ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CTA Section -->
-    <section class="py-16 bg-blue-600 text-white">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to Grow Your Business?</h2>
-        <p class="mb-8">Get your free consultation and discover how we can help you succeed online.</p>
-        <a href="/contact/" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100">
-          Get Your Free Consultation
-        </a>
-      </div>
-    </section>
-  </main>
+  <!-- CTA Section -->
+  <section class="py-16 bg-blue-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Grow Your Business?</h2>
+      <p class="mb-8">Get your free consultation and discover how we can help you succeed online.</p>
+      <a 
+        href="/contact/" 
+        class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100"
+      >
+        Get Your Free Consultation
+      </a>
+    </div>
+  </section>
 </Layout> 

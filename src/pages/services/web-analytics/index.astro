@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -159,9 +159,13 @@ const service = {
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/web-analytics.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.webAnalytics} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.webAnalytics} />
+    </div>
+  </div>
   
-  <ServiceHero
+  <OptimizedHero
     title="Web Analytics & Tracking"
     description="Make data-driven decisions with comprehensive web analytics. We help you understand your users and optimize your digital performance."
     backgroundImage="/images/heroes/web-analytics.jpg"

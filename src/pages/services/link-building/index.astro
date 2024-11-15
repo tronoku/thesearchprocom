@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -18,7 +18,7 @@ const schema = {
   "@graph": [
     generateServiceSchema({
       name: "Link Building & PR Services",
-      description: "Build authority with quality backlinks and strategic digital PR campaigns.",
+      description: "Build authority with quality backlinks and digital PR. Improve your rankings with strategic link building campaigns.",
       url: "/services/link-building/"
     }),
     generateBreadcrumbSchema(serviceBreadcrumbs.linkBuilding)
@@ -159,9 +159,13 @@ const service = {
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/link-building.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.linkBuilding} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.linkBuilding} />
+    </div>
+  </div>
   
-  <ServiceHero
+  <OptimizedHero
     title="Link Building Services"
     description="Build authority and improve rankings with high-quality backlinks. Our outreach strategies earn valuable links from relevant websites."
     backgroundImage="/images/heroes/link-building.jpg"

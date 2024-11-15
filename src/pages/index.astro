@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/ui/Card.astro';
 import Stats from '../components/common/Stats.astro';
 import ServiceHero from '../components/services/ServiceHero.astro';
+import OptimizedHero from '../components/common/OptimizedHero.astro';
 
 const stats = [
   {
@@ -52,26 +53,19 @@ const BASE_URL = import.meta.env.BASE_URL || '';
   type="website"
 >
   <main>
-    <!-- Hero Section -->
-    <section 
-      class="relative bg-gray-900 text-white py-32"
-      style="background-image: linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('/images/heroes/home.jpg'); background-size: cover; background-position: center;"
+    <OptimizedHero
+      title="Your Business Deserves To Be Found Online."
+      description="Every month, billions search for businesses like yours. Are you showing up where it matters?"
+      backgroundImage="/images/heroes/home.jpg"
     >
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="max-w-3xl">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Your Business Deserves<br />
-            To Be Found Online.
-          </h1>
-          <p class="text-xl mb-4">Every month, billions search for businesses like yours.</p>
-          <p class="text-xl mb-8">Are you showing up where it matters?</p>
-          <a href="/contact/" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700">
-            Get Your Free Quote
-          </a>
-        </div>
-      </div>
-    </section>
-
+      <a 
+        href="/contact/" 
+        class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700 mt-8"
+      >
+        Get Your Free Quote
+      </a>
+    </OptimizedHero>
+    
     <!-- Stats Section -->
     <section class="py-16 bg-white">
       <div class="max-w-6xl mx-auto px-4">

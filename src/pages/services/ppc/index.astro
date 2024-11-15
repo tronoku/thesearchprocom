@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -154,17 +154,21 @@ const service = {
 ---
 
 <Layout 
-  title="PPC Management - Maximize Your ROI"
-  description="Drive targeted traffic and conversions with our expert PPC management services. Get measurable results and maximize your ad spend."
+  title="PPC Management Services"
+  description="Drive targeted traffic and conversions with our expert PPC management services. Maximize ROI with strategic paid advertising campaigns."
   type="service"
   schema={schema}
-  ogImage={`${BASE_URL}/images/heroes/ppc.jpg`}
+  ogImage="/images/heroes/ppc.jpg"
 >
-  <Breadcrumbs items={serviceBreadcrumbs.ppc} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.ppc} />
+    </div>
+  </div>
   
-  <ServiceHero
-    title="Pay-Per-Click Advertising"
-    description="Drive targeted traffic and leads with strategic PPC campaigns. Our experts maximize your ROI across Google, Facebook, and other platforms."
+  <OptimizedHero
+    title="Pay-Per-Click Marketing"
+    description="Drive targeted traffic and conversions with data-driven PPC campaigns. Our expert team optimizes every aspect of your paid search strategy."
     backgroundImage="/images/heroes/ppc.jpg"
   />
   

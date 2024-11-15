@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -27,18 +27,18 @@ const schema = {
 
 const features = [
   {
-    title: "Custom Email Templates",
-    description: "Professionally designed email templates that match your brand and drive engagement.",
-    icon: "/images/services/icons/email-template.svg"
+    title: "Custom Email Design",
+    description: "Create beautiful, responsive email templates that look great on all devices.",
+    icon: "/images/services/icons/email-design.svg"
   },
   {
     title: "Campaign Strategy",
-    description: "Strategic email campaigns that convert subscribers into customers.",
-    icon: "/images/services/icons/email-strategy.svg"
+    description: "Develop effective email marketing strategies that drive engagement and conversions.",
+    icon: "/images/services/icons/campaign.svg"
   },
   {
     title: "Automation Setup",
-    description: "Automated email sequences that nurture leads and drive sales.",
+    description: "Implement automated email sequences that nurture leads and drive sales.",
     icon: "/images/services/icons/automation.svg"
   }
 ];
@@ -51,119 +51,126 @@ const process = [
   },
   {
     number: 2,
-    title: "Design & Creation",
-    description: "We design beautiful, responsive email templates that convert."
+    title: "Design & Development",
+    description: "We design and build responsive email templates that convert."
   },
   {
     number: 3,
     title: "Campaign Setup",
-    description: "We set up your campaigns and automation sequences."
+    description: "We set up your campaigns and automation workflows."
   },
   {
     number: 4,
     title: "Testing & Optimization",
-    description: "We test and optimize your emails for maximum performance."
+    description: "We test and optimize for maximum deliverability and engagement."
   }
 ];
 
 const results = {
   title: "Email Marketing Impact",
-  subtitle: "Our email marketing services deliver measurable results",
+  subtitle: "Our email design services deliver measurable results",
   stats: [
     {
-      value: "42%",
-      label: "Higher Open Rates"
+      value: "32%",
+      label: "Average Open Rate"
     },
     {
-      value: "38%",
-      label: "Better Click Rates"
+      value: "15%",
+      label: "Click-Through Rate"
     },
     {
       value: "4.2x",
-      label: "ROI Improvement"
+      label: "ROI on Email Campaigns"
     }
   ]
 };
 
 const pricing = [
   {
-    name: "Basic Email",
-    price: "$799",
+    name: "Email Essentials",
+    price: "$999",
     description: "For small businesses",
     features: [
-      "3 Custom Email Templates",
-      "Mobile Responsive Design",
-      "Basic Automation Setup",
+      "3 Email Templates",
+      "Basic Automation",
+      "Mobile Responsive",
       "A/B Testing",
-      "Campaign Setup"
+      "Campaign Setup",
+      "Basic Analytics"
     ]
   },
   {
-    name: "Business Email",
-    price: "$1,499",
+    name: "Email Growth",
+    price: "$1,999",
     description: "For growing businesses",
     isPopular: true,
     features: [
-      "6 Custom Email Templates",
+      "6 Email Templates",
       "Advanced Automation",
-      "Segmentation Setup",
-      "Integration Support",
-      "Performance Analytics",
-      "Campaign Strategy"
+      "Dynamic Content",
+      "Segmentation",
+      "Custom Integration",
+      "Advanced Analytics",
+      "Priority Support"
     ]
   },
   {
-    name: "Enterprise Email",
+    name: "Email Enterprise",
     price: "Custom",
     description: "For large organizations",
     features: [
       "Unlimited Templates",
       "Complex Automation",
-      "Custom Integration",
-      "Advanced Analytics",
-      "Strategy Consulting",
-      "Dedicated Support"
+      "Personalization",
+      "API Integration",
+      "Custom Reporting",
+      "Dedicated Manager",
+      "24/7 Support"
     ]
   }
 ];
 
 const faqs = [
   {
-    question: "What email platforms do you work with?",
-    answer: "We work with all major email platforms including Mailchimp, Constant Contact, ActiveCampaign, HubSpot, and others. We'll help you choose the best platform for your needs."
+    question: "Are your email templates responsive?",
+    answer: "Yes, all our email templates are fully responsive and tested across major email clients and devices to ensure optimal display everywhere."
   },
   {
-    question: "Are your email templates mobile-responsive?",
-    answer: "Yes, all our email templates are fully responsive and tested across multiple email clients and devices to ensure they look great everywhere."
+    question: "Do you integrate with my email platform?",
+    answer: "We work with all major email marketing platforms including Mailchimp, Constant Contact, HubSpot, and others. We'll help you choose the best platform for your needs."
   },
   {
     question: "Can you help with email automation?",
-    answer: "Yes, we can set up automated email sequences for welcome series, abandoned cart recovery, customer onboarding, and other key touchpoints in your customer journey."
+    answer: "Yes, we can set up automated email sequences including welcome series, abandoned cart recovery, post-purchase follow-ups, and more."
   },
   {
-    question: "Do you provide email copywriting?",
-    answer: "Yes, we can help write compelling email copy that engages your audience and drives conversions. Our copywriters understand email marketing best practices."
+    question: "How do you measure success?",
+    answer: "We track key metrics including open rates, click-through rates, conversion rates, and ROI. We provide regular reports showing the impact of your email campaigns."
   }
 ];
 
 const service = {
   name: "Email Design",
-  action: "Improve Your Email Marketing"
+  action: "Start Converting More Subscribers"
 };
 ---
 
 <Layout 
   title="Email Design Services"
-  description="Create email campaigns that engage and convert. Get professional email templates that drive results."
+  description="Create email campaigns that engage and convert with our custom email design services. Get better results from your email marketing."
   type="service"
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/email-design.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.emailDesign} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.emailDesign} />
+    </div>
+  </div>
   
-  <ServiceHero
-    title="Email Marketing & Design"
-    description="Create engaging email campaigns that convert. Our email marketing experts help you nurture leads and drive sales."
+  <OptimizedHero
+    title="Email Design Services"
+    description="Create beautiful, high-converting email campaigns. Our expert team designs responsive emails that engage your subscribers and drive results."
     backgroundImage="/images/heroes/email-design.jpg"
   />
   

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -159,9 +159,13 @@ const service = {
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/maps-optimization.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.mapsOptimization} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.mapsOptimization} />
+    </div>
+  </div>
   
-  <ServiceHero
+  <OptimizedHero
     title="Google Maps Optimization"
     description="Dominate local search and attract nearby customers. We help your business stand out in Google Maps and local search results."
     backgroundImage="/images/heroes/maps.jpg"

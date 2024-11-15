@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  backgroundImage: string;
+  className?: string;
+}
+
+const { 
+  title, 
+  description, 
+  backgroundImage,
+  className = "" 
+} = Astro.props;
+---
+
+<section 
+  class={`relative bg-gray-900 text-white py-32 ${className}`}
+  style={{
+    backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${backgroundImage}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: 'auto',
+    minHeight: '400px'
+  }}
+>
+  <!-- Preload background image -->
+  <link 
+    rel="preload" 
+    as="image" 
+    href={backgroundImage} 
+    fetchpriority="high"
+  />
+  
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="max-w-3xl">
+      <h1 
+        class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+        style={{
+          // Optimize text rendering
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased'
+        }}
+      >
+        {title}
+      </h1>
+      {description && (
+        <p class="text-xl text-gray-300">
+          {description}
+        </p>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Critical CSS for hero section */
+  section {
+    contain: layout paint;
+    content-visibility: auto;
+  }
+  
+  h1 {
+    contain: style layout;
+  }
+</style> 

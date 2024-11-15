@@ -30,7 +30,15 @@ const BASE_URL = import.meta.env.BASE_URL || '';
   <!-- Hero Section -->
   <section 
     class="relative bg-gray-900 text-white py-32"
-    style="background-image: linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('/images/heroes/contact.jpg'); background-size: cover; background-position: center;"
+    style={{
+      backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('/images/heroes/contact.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: 'auto',
+      minHeight: '400px'
+    }}
+    role="banner"
+    aria-label="Contact hero section"
   >
     <div class="max-w-6xl mx-auto px-4">
       <div class="max-w-3xl">
@@ -73,6 +81,13 @@ const BASE_URL = import.meta.env.BASE_URL || '';
 
         
         <div class="bg-gray-50 p-8 rounded-lg">
+          <img 
+            src="/images/logo.svg" 
+            alt="TheSearchPro" 
+            class="h-8" 
+            width="160" 
+            height="32"
+          />
           <ContactForm />
         </div>
       </div>
@@ -188,17 +203,20 @@ const BASE_URL = import.meta.env.BASE_URL || '';
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
       <p class="text-gray-600 mb-8">Subscribe to our newsletter for digital marketing tips, industry news, and exclusive offers.</p>
-      <form class="max-w-md mx-auto flex gap-4">
+      <form class="max-w-md mx-auto flex gap-4" id="newsletter-form">
         <input 
           type="email" 
           placeholder="Enter your email" 
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
         >
         <button 
           type="submit" 
           class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          disabled={loading}
         >
-          Subscribe
+          <span class="inline-block">Subscribe</span>
         </button>
       </form>
     </div>

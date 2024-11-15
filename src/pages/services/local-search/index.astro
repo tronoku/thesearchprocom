@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ServiceHero from '../../../components/services/ServiceHero.astro';
+import OptimizedHero from '../../../components/common/OptimizedHero.astro';
 import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
 import ServiceProcess from '../../../components/services/ServiceProcess.astro';
 import PricingTable from '../../../components/services/PricingTable.astro';
@@ -140,9 +140,13 @@ const service = {
   schema={schema}
   ogImage={`${BASE_URL}/images/heroes/local-search.jpg`}
 >
-  <Breadcrumbs items={serviceBreadcrumbs.localSearch} />
+  <div class="bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <Breadcrumbs items={serviceBreadcrumbs.localSearch} />
+    </div>
+  </div>
   
-  <ServiceHero
+  <OptimizedHero
     title="Local Search Optimization"
     description="Dominate your local market and attract nearby customers. We help your business rank in local search results and Google Maps."
     backgroundImage="/images/heroes/local-search.jpg"
