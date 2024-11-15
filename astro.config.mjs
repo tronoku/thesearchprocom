@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://tronoku.github.io',
-  base: '/thesearchprocom',
+  site: 'https://thesearchpro.com',
+  base: '/',
   integrations: [tailwind()],
   server: {
     headers: {
