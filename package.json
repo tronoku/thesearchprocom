@@ -15,6 +15,8 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/inter": "^5.0.17",
     "astro": "^4.15.3",
+    "blurhash": "^2.0.5",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.1",
     "yaml": "^2.4.1"
   },

@@ -1,6 +1,11 @@
 ---
+import sharp from 'sharp';
+import { encode } from 'blurhash';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   backgroundImage: string;
   className?: string;
@@ -12,38 +17,102 @@ const {
   backgroundImage,
   className = "" 
 } = Astro.props;
+
+// Validate required props
+if (!backgroundImage) {
+  throw new Error('OptimizedHero: backgroundImage prop is required');
+}
+
+// Function to generate blurhash at build time
+async function generateBlurhash(imagePath: string) {
+  try {
+    if (!imagePath) {
+      throw new Error('Image path is required');
+    }
+
+    // Get the absolute path to the public directory
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const publicDir = path.join(__dirname, '../../../public');
+    
+    // Remove leading slash from imagePath if present
+    const normalizedImagePath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+    
+    // Construct the full path to the image
+    const fullImagePath = path.join(publicDir, normalizedImagePath);
+
+    // Load image with sharp and resize to smaller dimensions for blurhash
+    const { data, info } = await sharp(fullImagePath)
+      .raw()
+      .ensureAlpha()
+      .resize(32, 32, { fit: 'inside' })
+      .toBuffer({ resolveWithObject: true });
+
+    // Convert the raw pixel data to the format blurhash expects (Uint8ClampedArray)
+    const pixels = new Uint8ClampedArray(data.buffer);
+
+    // Generate blurhash
+    const blurhash = encode(pixels, info.width, info.height, 4, 3);
+    return blurhash;
+  } catch (error) {
+    console.error('Error generating blurhash:', error);
+    console.error('Image path:', imagePath);
+    return null;
+  }
+}
+
+let blurhash = null;
+try {
+  blurhash = await generateBlurhash(backgroundImage);
+} catch (error) {
+  console.error('Failed to generate blurhash:', error);
+}
 ---
 
 <section 
   class={`relative bg-gray-900 text-white py-32 ${className}`}
-  style={{
-    backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${backgroundImage}')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: 'auto',
-    minHeight: '400px'
-  }}
 >
-  <!-- Preload background image -->
-  <link 
-    rel="preload" 
-    as="image" 
-    href={backgroundImage} 
-    fetchpriority="high"
-  />
-  
-  <div class="max-w-6xl mx-auto px-4">
+  <div class="absolute inset-0 overflow-hidden">
+    {blurhash && (
+      <div 
+        class="absolute inset-0 blur-lg transform scale-110"
+        data-blurhash={blurhash}
+        id="blurhash-placeholder"
+      />
+    )}
+    
+    <!-- Hidden image to trigger load event -->
+    <img 
+      src={backgroundImage}
+      alt=""
+      class="hidden"
+      onload="document.getElementById('hero-bg').style.opacity = '1'; document.getElementById('blurhash-placeholder').style.opacity = '0';"
+    />
+    
+    <!-- Background div -->
+    <div 
+      id="hero-bg"
+      class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(17, 24, 39, 0.95) 50%, rgba(17, 24, 39, 0.75)), url('${backgroundImage}')`,
+        opacity: 0
+      }}
+    />
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 relative z-10">
     <div class="max-w-3xl">
-      <h1 
-        class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-        style={{
-          // Optimize text rendering
-          textRendering: 'optimizeLegibility',
-          WebkitFontSmoothing: 'antialiased'
-        }}
-      >
-        {title}
-      </h1>
+      {title && (
+        <h1 
+          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+          style={{
+            textRendering: 'optimizeLegibility',
+            WebkitFontSmoothing: 'antialiased'
+          }}
+        >
+          {title}
+        </h1>
+      )}
       {description && (
         <p class="text-xl text-gray-300">
           {description}
@@ -54,14 +123,28 @@ const {
   </div>
 </section>
 
-<style>
-  /* Critical CSS for hero section */
-  section {
-    contain: layout paint;
-    content-visibility: auto;
+<script>
+  import { decode } from 'blurhash';
+
+  // Function to render blurhash
+  function renderBlurhash(blurhash: string, width: number, height: number, canvas: HTMLCanvasElement) {
+    const pixels = decode(blurhash, width, height);
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.createImageData(width, height);
+    imageData.data.set(pixels);
+    ctx.putImageData(imageData, 0, 0);
   }
-  
-  h1 {
-    contain: style layout;
-  }
-</style> 
+
+  // Find all blurhash placeholders and render them
+  document.querySelectorAll('#blurhash-placeholder').forEach((placeholder) => {
+    const blurhash = placeholder.getAttribute('data-blurhash');
+    if (!blurhash) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    placeholder.appendChild(canvas);
+
+    renderBlurhash(blurhash, 32, 32, canvas);
+  });
+</script> 
