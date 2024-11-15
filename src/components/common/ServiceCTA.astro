@@ -1,0 +1,23 @@
+---
+interface Props {
+  service: {
+    name: string;
+    action: string;
+  };
+}
+
+const { service } = Astro.props;
+---
+
+<section class="py-16 bg-blue-600 text-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-4">Ready to {service.action}?</h2>
+    <p class="mb-8">Get your free {service.name} consultation and quote today!</p>
+    <a 
+      href="/contact" 
+      class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 inline-block"
+    >
+      Get Your Free {service.name} Quote
+    </a>
+  </div>
+</section> 

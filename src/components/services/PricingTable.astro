@@ -1,0 +1,51 @@
+---
+interface PricingTier {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+  isPopular?: boolean;
+}
+
+interface Props {
+  tiers: PricingTier[];
+}
+
+const { tiers } = Astro.props;
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Pricing Plans</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {tiers.map(tier => (
+        <div class={`rounded-lg border ${tier.isPopular ? 'border-blue-600 shadow-lg' : 'border-gray-200'} p-8`}>
+          {tier.isPopular && <span class="text-blue-600 font-semibold mb-2 block">Most Popular</span>}
+          <h3 class="text-2xl font-bold mb-2">{tier.name}</h3>
+          <p class="text-gray-600 mb-4">{tier.description}</p>
+          <div class="text-3xl font-bold mb-6">{tier.price}</div>
+          <ul class="space-y-3 mb-8">
+            {tier.features.map(feature => (
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <a 
+            href="/contact" 
+            class={`block text-center py-3 px-6 rounded-md font-semibold ${
+              tier.isPopular 
+                ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+            }`}
+          >
+            Get Started
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 

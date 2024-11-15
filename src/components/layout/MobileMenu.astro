@@ -1,0 +1,51 @@
+---
+interface Props {
+  isOpen: boolean;
+}
+
+const { isOpen } = Astro.props;
+---
+
+<div 
+  class:list={[
+    "lg:hidden fixed inset-0 bg-gray-900/50 z-40 transition-opacity duration-300",
+    isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+  ]}
+  id="mobile-menu-overlay"
+>
+  <div 
+    class:list={[
+      "fixed right-0 top-0 h-full w-64 bg-white shadow-xl transition-transform duration-300 transform",
+      isOpen ? "translate-x-0" : "translate-x-full"
+    ]}
+  >
+    <slot />
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const button = document.getElementById('mobile-menu-button');
+  
+  let isOpen = false;
+
+  function toggleMenu() {
+    isOpen = !isOpen;
+    if (overlay) {
+      if (isOpen) {
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.querySelector('div')?.classList.remove('translate-x-full');
+      } else {
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        overlay.querySelector('div')?.classList.add('translate-x-full');
+      }
+    }
+  }
+
+  button?.addEventListener('click', toggleMenu);
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      toggleMenu();
+    }
+  });
+</script> 

@@ -1,0 +1,181 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "Web Analytics Services",
+      description: "Get comprehensive insights about your website's performance with our advanced web analytics services.",
+      url: "/services/web-analytics"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.webAnalytics)
+  ]
+};
+
+const features = [
+  {
+    title: "Data Collection & Setup",
+    description: "Professional setup of analytics tools to track all important user interactions and conversions.",
+    icon: "/images/services/icons/data.svg"
+  },
+  {
+    title: "Custom Reporting",
+    description: "Detailed reports tailored to your business goals and KPIs.",
+    icon: "/images/services/icons/report.svg"
+  },
+  {
+    title: "Actionable Insights",
+    description: "Transform raw data into strategic recommendations for your business.",
+    icon: "/images/services/icons/insights.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Analytics Audit",
+    description: "We review your current analytics setup and identify gaps in tracking and reporting."
+  },
+  {
+    number: 2,
+    title: "Implementation",
+    description: "We set up comprehensive tracking across your website and marketing channels."
+  },
+  {
+    number: 3,
+    title: "Data Analysis",
+    description: "We analyze your data to identify trends, opportunities, and areas for improvement."
+  },
+  {
+    number: 4,
+    title: "Strategic Recommendations",
+    description: "We provide actionable insights and recommendations based on the data."
+  }
+];
+
+const results = {
+  title: "Analytics Impact",
+  subtitle: "Our analytics services deliver measurable results",
+  stats: [
+    {
+      value: "98%",
+      label: "Tracking Accuracy"
+    },
+    {
+      value: "45%",
+      label: "Increase in Conversion Rate"
+    },
+    {
+      value: "2.5x",
+      label: "Return on Marketing Investment"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Basic Analytics",
+    price: "$499/mo",
+    description: "For small websites",
+    features: [
+      "Google Analytics Setup",
+      "Monthly Reports",
+      "Basic Goal Tracking",
+      "Traffic Analysis",
+      "Basic SEO Metrics"
+    ]
+  },
+  {
+    name: "Professional Analytics",
+    price: "$999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Basic",
+      "Custom Dashboard",
+      "Advanced Goal Tracking",
+      "User Behavior Analysis",
+      "Weekly Reports",
+      "Conversion Tracking"
+    ]
+  },
+  {
+    name: "Enterprise Analytics",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Everything in Professional",
+      "Custom Implementation",
+      "Advanced Data Analysis",
+      "Multi-domain Tracking",
+      "API Integration",
+      "24/7 Support"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "What analytics tools do you work with?",
+    answer: "We work with all major analytics platforms including Google Analytics, Adobe Analytics, Mixpanel, and other custom solutions. We'll recommend the best tools for your specific needs."
+  },
+  {
+    question: "How often will I receive reports?",
+    answer: "Depending on your package, we provide weekly or monthly detailed reports. All clients have access to real-time dashboards, and we can customize reporting frequency to your needs."
+  },
+  {
+    question: "Can you help with historical data analysis?",
+    answer: "Yes, we can analyze your historical data to identify trends and patterns that can inform future strategy. We'll help you understand what's worked well and what needs improvement."
+  },
+  {
+    question: "Do you provide training for our team?",
+    answer: "Yes, we offer training sessions to help your team understand the analytics tools and reports. We believe in empowering our clients to make data-driven decisions."
+  }
+];
+
+const service = {
+  name: "Analytics",
+  action: "Start Making Data-Driven Decisions"
+};
+---
+
+<Layout 
+  title="Web Analytics Services - TheSearchPro"
+  description="Get comprehensive insights about your website's performance with our advanced web analytics services."
+  schema={schema}
+>
+  <Breadcrumbs items={serviceBreadcrumbs.webAnalytics} />
+  
+  <ServiceHero
+    title="Advanced Web Analytics"
+    description="Get comprehensive insights about your website's performance and visitor behavior. Make data-driven decisions to improve your online presence."
+    icon="/images/services/analytics-hero.svg"
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
+</Layout> 

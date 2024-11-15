@@ -1,0 +1,13 @@
+---
+interface Props {
+  schema: object | object[];
+}
+
+const { schema } = Astro.props;
+
+const schemaString = JSON.stringify(
+  Array.isArray(schema) ? schema : [schema]
+);
+---
+
+<script type="application/ld+json" set:html={schemaString} /> 

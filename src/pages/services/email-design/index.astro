@@ -1,0 +1,181 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "Custom Email Design",
+      description: "Create email campaigns that engage and convert with our custom email design services.",
+      url: "/services/email-design"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.emailDesign)
+  ]
+};
+
+const features = [
+  {
+    title: "Custom Email Templates",
+    description: "Professionally designed email templates that match your brand and drive engagement.",
+    icon: "/images/services/icons/email-template.svg"
+  },
+  {
+    title: "Campaign Strategy",
+    description: "Strategic email campaigns that convert subscribers into customers.",
+    icon: "/images/services/icons/email-strategy.svg"
+  },
+  {
+    title: "Automation Setup",
+    description: "Automated email sequences that nurture leads and drive sales.",
+    icon: "/images/services/icons/automation.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Strategy Development",
+    description: "We create a custom email marketing strategy aligned with your goals."
+  },
+  {
+    number: 2,
+    title: "Design & Creation",
+    description: "We design beautiful, responsive email templates that convert."
+  },
+  {
+    number: 3,
+    title: "Campaign Setup",
+    description: "We set up your campaigns and automation sequences."
+  },
+  {
+    number: 4,
+    title: "Testing & Optimization",
+    description: "We test and optimize your emails for maximum performance."
+  }
+];
+
+const results = {
+  title: "Email Marketing Impact",
+  subtitle: "Our email marketing services deliver measurable results",
+  stats: [
+    {
+      value: "42%",
+      label: "Higher Open Rates"
+    },
+    {
+      value: "38%",
+      label: "Better Click Rates"
+    },
+    {
+      value: "4.2x",
+      label: "ROI Improvement"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Basic Email",
+    price: "$799",
+    description: "For small businesses",
+    features: [
+      "3 Custom Email Templates",
+      "Mobile Responsive Design",
+      "Basic Automation Setup",
+      "A/B Testing",
+      "Campaign Setup"
+    ]
+  },
+  {
+    name: "Business Email",
+    price: "$1,499",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "6 Custom Email Templates",
+      "Advanced Automation",
+      "Segmentation Setup",
+      "Integration Support",
+      "Performance Analytics",
+      "Campaign Strategy"
+    ]
+  },
+  {
+    name: "Enterprise Email",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Unlimited Templates",
+      "Complex Automation",
+      "Custom Integration",
+      "Advanced Analytics",
+      "Strategy Consulting",
+      "Dedicated Support"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "What email platforms do you work with?",
+    answer: "We work with all major email platforms including Mailchimp, Constant Contact, ActiveCampaign, HubSpot, and others. We'll help you choose the best platform for your needs."
+  },
+  {
+    question: "Are your email templates mobile-responsive?",
+    answer: "Yes, all our email templates are fully responsive and tested across multiple email clients and devices to ensure they look great everywhere."
+  },
+  {
+    question: "Can you help with email automation?",
+    answer: "Yes, we can set up automated email sequences for welcome series, abandoned cart recovery, customer onboarding, and other key touchpoints in your customer journey."
+  },
+  {
+    question: "Do you provide email copywriting?",
+    answer: "Yes, we can help write compelling email copy that engages your audience and drives conversions. Our copywriters understand email marketing best practices."
+  }
+];
+
+const service = {
+  name: "Email Design",
+  action: "Improve Your Email Marketing"
+};
+---
+
+<Layout 
+  title="Custom Email Design Services - TheSearchPro"
+  description="Create email campaigns that engage and convert with our custom email design services."
+  schema={schema}
+>
+  <Breadcrumbs items={serviceBreadcrumbs.emailDesign} />
+  
+  <ServiceHero
+    title="Custom Email Design"
+    description="Create email campaigns that engage and convert. Get professional email templates that drive results."
+    icon="/images/services/email-hero.svg"
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
+</Layout> 

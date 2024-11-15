@@ -1,0 +1,29 @@
+---
+interface Props {
+  name: string;
+  type?: 'filled' | 'outlined';
+  class?: string;
+}
+
+const { 
+  name, 
+  type = 'outlined',
+  class: className = "w-6 h-6" 
+} = Astro.props;
+
+const iconClass = type === 'outlined' ? 'material-icons-outlined' : 'material-icons';
+---
+
+<span class={`${iconClass} ${className}`}>{name}</span>
+
+<style>
+  .material-icons,
+  .material-icons-outlined {
+    font-size: inherit;
+    line-height: inherit;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style> 

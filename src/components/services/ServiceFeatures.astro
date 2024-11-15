@@ -1,0 +1,63 @@
+---
+import Icon from '../common/Icon.astro';
+
+interface Feature {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  features: Feature[];
+}
+
+const { features } = Astro.props;
+
+// Map service icons to Material Icons names
+const iconMap = {
+  'seo-design': 'search',
+  'responsive': 'devices',
+  'conversion': 'trending_up',
+  'strategy': 'lightbulb',
+  'analytics': 'analytics',
+  'platform': 'hub',
+  'community': 'groups',
+  'content': 'article',
+  'outreach': 'share',
+  'maps': 'location_on',
+  'location': 'place',
+  'citation': 'format_quote',
+  'reviews': 'star_rate',
+  'local-seo': 'store',
+  'email': 'email',
+  'automation': 'auto_fix_high',
+  'data': 'data_usage',
+  'report': 'assessment',
+  'insights': 'insights',
+  'link-building': 'link',
+  'digital-pr': 'campaign'
+};
+
+const getIconName = (iconPath: string) => {
+  const iconKey = iconPath.split('/').pop()?.replace('.svg', '') || '';
+  return iconMap[iconKey] || 'extension'; // fallback icon
+};
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {features.map(feature => (
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-blue-600">
+            <Icon name={getIconName(feature.icon)} class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-2">{feature.title}</h3>
+            <p class="text-gray-600">{feature.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 

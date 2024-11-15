@@ -1,0 +1,161 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+
+const features = [
+  {
+    title: "Local SEO",
+    description: "Optimize your business for local search results and Google Maps visibility.",
+    icon: "/images/services/icons/local-seo.svg"
+  },
+  {
+    title: "Citation Building",
+    description: "Create and manage business listings across all important local directories.",
+    icon: "/images/services/icons/citation.svg"
+  },
+  {
+    title: "Review Management",
+    description: "Monitor and manage your online reviews to build trust with local customers.",
+    icon: "/images/services/icons/reviews.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Local Presence Audit",
+    description: "We analyze your current local presence and identify opportunities for improvement."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a customized local search strategy based on your market and competition."
+  },
+  {
+    number: 3,
+    title: "Optimization & Implementation",
+    description: "We optimize your local presence across Google Business Profile and local directories."
+  },
+  {
+    number: 4,
+    title: "Review & Reputation Management",
+    description: "We help manage and respond to reviews while building a positive local reputation."
+  }
+];
+
+const pricing = [
+  {
+    name: "Local Starter",
+    price: "$599/mo",
+    description: "For single-location businesses",
+    features: [
+      "Google Business Profile Optimization",
+      "Basic Citation Building",
+      "Local Keyword Optimization",
+      "Monthly Reporting",
+      "Review Monitoring"
+    ]
+  },
+  {
+    name: "Local Growth",
+    price: "$999/mo",
+    description: "For growing local businesses",
+    isPopular: true,
+    features: [
+      "Everything in Starter",
+      "Advanced Citation Building",
+      "Review Management",
+      "Local Content Strategy",
+      "Competitor Analysis",
+      "Weekly Updates"
+    ]
+  },
+  {
+    name: "Multi-Location",
+    price: "Custom",
+    description: "For businesses with multiple locations",
+    features: [
+      "Everything in Growth",
+      "Multi-Location Management",
+      "Franchise SEO",
+      "Custom Reporting",
+      "Priority Support",
+      "Strategy Consulting"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "Why is local search important?",
+    answer: "Local search is crucial for businesses targeting local customers. 46% of all Google searches have local intent, and 88% of consumers who do a local search on their smartphone visit or call a store within 24 hours."
+  },
+  {
+    question: "How long does it take to see results?",
+    answer: "While some improvements can be seen within weeks, significant results in local search typically take 3-6 months. This allows time for Google to recognize and trust your local presence."
+  },
+  {
+    question: "Do you handle review responses?",
+    answer: "Yes, we can help manage and respond to your reviews across various platforms. We'll help you maintain a positive online reputation and address any customer concerns professionally."
+  },
+  {
+    question: "What local directories do you work with?",
+    answer: "We work with all major local directories including Google Business Profile, Bing Places, Yelp, Yellow Pages, and industry-specific directories relevant to your business."
+  }
+];
+---
+
+<Layout 
+  title="Local Search Strategy Services - TheSearchPro"
+  description="Get found by customers in your area with our proven local search strategies."
+>
+  <ServiceHero
+    title="Local Search Strategy"
+    description="Get found by customers in your area with local SEO strategies that drive foot traffic and phone calls."
+    icon="/images/services/local-search-hero.svg"
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <!-- Local Impact Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Local Search Impact</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="text-4xl font-bold text-blue-600 mb-2">200%</div>
+          <p class="text-gray-600">Average Increase in Local Visibility</p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="text-4xl font-bold text-blue-600 mb-2">150%</div>
+          <p class="text-gray-600">More Phone Calls from Local Searches</p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="text-4xl font-bold text-blue-600 mb-2">4.8</div>
+          <p class="text-gray-600">Average Star Rating for Clients</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-blue-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Dominate Local Search?</h2>
+      <p class="mb-8">Get your free local presence audit and consultation today!</p>
+      <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100">
+        Get Your Free Local Audit
+      </a>
+    </div>
+  </section>
+</Layout> 

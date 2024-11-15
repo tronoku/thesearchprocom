@@ -1,0 +1,25 @@
+---
+import HeroImage from '../common/HeroImage.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<section class="pt-32 pb-16 bg-gray-900 text-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
+        <p class="text-xl text-gray-300">{description}</p>
+      </div>
+      <div>
+        <HeroImage name={icon || 'default'} />
+      </div>
+    </div>
+  </div>
+</section> 

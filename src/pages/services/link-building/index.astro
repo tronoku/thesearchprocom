@@ -1,0 +1,181 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "Link Building & PR",
+      description: "Build authority with quality backlinks and strategic digital PR campaigns.",
+      url: "/services/link-building"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.linkBuilding)
+  ]
+};
+
+const features = [
+  {
+    title: "Quality Link Building",
+    description: "Build high-authority backlinks from relevant, trusted websites in your industry.",
+    icon: "/images/services/icons/link-building.svg"
+  },
+  {
+    title: "Digital PR",
+    description: "Get featured in industry publications and news outlets to boost your brand authority.",
+    icon: "/images/services/icons/digital-pr.svg"
+  },
+  {
+    title: "Content Outreach",
+    description: "Strategic content promotion to earn natural backlinks and mentions.",
+    icon: "/images/services/icons/outreach.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Link Profile Analysis",
+    description: "We analyze your current backlink profile and identify opportunities for improvement."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a custom link building strategy based on your industry and goals."
+  },
+  {
+    number: 3,
+    title: "Content Creation & Outreach",
+    description: "We create linkable assets and conduct targeted outreach campaigns."
+  },
+  {
+    number: 4,
+    title: "Monitoring & Reporting",
+    description: "We track link acquisition and measure the impact on your site's authority."
+  }
+];
+
+const results = {
+  title: "Link Building Impact",
+  subtitle: "Our link building services deliver measurable results",
+  stats: [
+    {
+      value: "187%",
+      label: "Average Increase in Domain Authority"
+    },
+    {
+      value: "245%",
+      label: "More Referring Domains"
+    },
+    {
+      value: "312%",
+      label: "Increase in Organic Traffic"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Starter",
+    price: "$999/mo",
+    description: "For small businesses",
+    features: [
+      "10 Quality Backlinks/Month",
+      "Content Creation",
+      "Basic Outreach",
+      "Monthly Reporting",
+      "Link Profile Monitoring"
+    ]
+  },
+  {
+    name: "Professional",
+    price: "$1,999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "25 Quality Backlinks/Month",
+      "Digital PR Campaigns",
+      "Advanced Content Creation",
+      "Competitor Analysis",
+      "Weekly Reporting",
+      "Guest Posting"
+    ]
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Custom Link Volume",
+      "Premium Publications",
+      "Advanced Digital PR",
+      "Custom Content Strategy",
+      "Priority Support",
+      "Strategy Consulting"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "Why is link building important?",
+    answer: "Link building is crucial because backlinks remain one of Google's top ranking factors. Quality backlinks signal to search engines that your website is trustworthy and authoritative, helping improve your search rankings."
+  },
+  {
+    question: "How do you ensure link quality?",
+    answer: "We evaluate potential link opportunities based on domain authority, relevance, traffic, and overall site quality. We only pursue links from legitimate websites that add value to your link profile."
+  },
+  {
+    question: "What types of links do you build?",
+    answer: "We focus on editorial links, guest posts, resource links, and digital PR mentions. All links are acquired through white-hat methods that comply with Google's guidelines."
+  },
+  {
+    question: "How long until we see results?",
+    answer: "Link building is a long-term strategy. While some impact can be seen within 2-3 months, significant improvements in rankings typically take 4-6 months as search engines process new links."
+  }
+];
+
+const service = {
+  name: "Link Building",
+  action: "Build Your Site's Authority"
+};
+---
+
+<Layout 
+  title="Link Building & PR Services - TheSearchPro"
+  description="Build authority with quality backlinks and strategic digital PR campaigns."
+  schema={schema}
+>
+  <Breadcrumbs items={serviceBreadcrumbs.linkBuilding} />
+  
+  <ServiceHero
+    title="Link Building & PR"
+    description="Build authority with quality backlinks and digital PR. Improve your rankings with strategic link building campaigns."
+    icon="/images/services/link-building-hero.svg"
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
+</Layout> 

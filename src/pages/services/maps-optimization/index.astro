@@ -1,0 +1,181 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+import Results from '../../../components/common/Results.astro';
+import ServiceCTA from '../../../components/common/ServiceCTA.astro';
+import Breadcrumbs from '../../../components/common/Breadcrumbs.astro';
+import { serviceBreadcrumbs } from '../../../utils/breadcrumbs';
+import { generateServiceSchema, generateBreadcrumbSchema } from '../../../utils/structuredData';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    generateServiceSchema({
+      name: "Maps Search Optimization",
+      description: "Optimize your presence on Google Maps and local directories to attract more local customers.",
+      url: "/services/maps-optimization"
+    }),
+    generateBreadcrumbSchema(serviceBreadcrumbs.mapsOptimization)
+  ]
+};
+
+const features = [
+  {
+    title: "Google Maps Optimization",
+    description: "Optimize your Google Business Profile for maximum visibility in Maps searches.",
+    icon: "/images/services/icons/maps.svg"
+  },
+  {
+    title: "Local Pack Rankings",
+    description: "Improve your rankings in Google's Local Pack search results.",
+    icon: "/images/services/icons/local-pack.svg"
+  },
+  {
+    title: "Location Data Management",
+    description: "Maintain accurate location data across all mapping platforms.",
+    icon: "/images/services/icons/location.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Maps Presence Audit",
+    description: "We analyze your current presence on Google Maps and other mapping platforms."
+  },
+  {
+    number: 2,
+    title: "Profile Optimization",
+    description: "We optimize your business profiles with accurate, engaging information."
+  },
+  {
+    number: 3,
+    title: "Citation Building",
+    description: "We create and manage citations to boost your local authority."
+  },
+  {
+    number: 4,
+    title: "Review Generation",
+    description: "We help you generate and manage reviews to improve your visibility."
+  }
+];
+
+const results = {
+  title: "Maps Optimization Impact",
+  subtitle: "Our maps optimization services deliver measurable results",
+  stats: [
+    {
+      value: "156%",
+      label: "Average Increase in Maps Views"
+    },
+    {
+      value: "94%",
+      label: "More Direction Requests"
+    },
+    {
+      value: "127%",
+      label: "Increase in Phone Calls"
+    }
+  ]
+};
+
+const pricing = [
+  {
+    name: "Basic Maps",
+    price: "$499/mo",
+    description: "For single-location businesses",
+    features: [
+      "Google Maps Optimization",
+      "Basic Profile Management",
+      "Monthly Reporting",
+      "Review Monitoring",
+      "Citation Building"
+    ]
+  },
+  {
+    name: "Professional Maps",
+    price: "$899/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Basic",
+      "Advanced Profile Optimization",
+      "Review Management",
+      "Photo Optimization",
+      "Competitor Analysis",
+      "Weekly Updates"
+    ]
+  },
+  {
+    name: "Enterprise Maps",
+    price: "Custom",
+    description: "For multi-location businesses",
+    features: [
+      "Everything in Professional",
+      "Multi-Location Management",
+      "Custom Reporting",
+      "Priority Support",
+      "Strategy Consulting",
+      "API Integration"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "Why is Google Maps optimization important?",
+    answer: "Google Maps optimization is crucial because 46% of all Google searches have local intent, and the Maps results are often the first thing users see. Good Maps visibility can dramatically increase foot traffic and calls to your business."
+  },
+  {
+    question: "How long does it take to see results?",
+    answer: "Initial improvements can be seen within a few weeks, but significant results typically take 2-3 months as Google processes the optimizations and new citations."
+  },
+  {
+    question: "Do you work with other mapping platforms?",
+    answer: "Yes, while Google Maps is our primary focus, we also optimize your presence on Apple Maps, Bing Maps, and other relevant mapping platforms."
+  },
+  {
+    question: "How do you handle multi-location businesses?",
+    answer: "We have specialized processes for managing multiple locations, ensuring consistency while optimizing each location for its specific market and competition."
+  }
+];
+
+const service = {
+  name: "Maps Optimization",
+  action: "Dominate Local Maps"
+};
+---
+
+<Layout 
+  title="Maps Search Optimization Services - TheSearchPro"
+  description="Optimize your presence on Google Maps and local directories to attract more local customers."
+  schema={schema}
+>
+  <Breadcrumbs items={serviceBreadcrumbs.mapsOptimization} />
+  
+  <ServiceHero
+    title="Maps Search Optimization"
+    description="Optimize your presence on Google Maps and local directories. Get found by customers searching for businesses like yours."
+    icon="/images/services/maps-hero.svg"
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <Results 
+    title={results.title}
+    subtitle={results.subtitle}
+    stats={results.stats}
+  />
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <ServiceCTA service={service} />
+</Layout> 

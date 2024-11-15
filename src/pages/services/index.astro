@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/ui/Card.astro';
+import Breadcrumbs from '../../components/common/Breadcrumbs.astro';
+import { mainBreadcrumbs } from '../../utils/breadcrumbs';
+import { generateBreadcrumbSchema } from '../../utils/structuredData';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "Services",
+      "description": "Professional digital marketing services including SEO, PPC, web design, and more.",
+      "url": `${import.meta.env.PUBLIC_SITE_URL}/services`
+    },
+    generateBreadcrumbSchema(mainBreadcrumbs.services)
+  ]
+};
+---
+
+<Layout 
+  title="Digital Marketing Services - TheSearchPro"
+  description="Professional digital marketing services including SEO, PPC, web design, and more."
+  schema={schema}
+>
+  <Breadcrumbs items={mainBreadcrumbs.services} />
+  <!-- Rest of the services page content -->
+</Layout> 

@@ -1,0 +1,161 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceHero from '../../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../../components/services/ServiceFeatures.astro';
+import ServiceProcess from '../../../components/services/ServiceProcess.astro';
+import PricingTable from '../../../components/services/PricingTable.astro';
+import FAQ from '../../../components/services/FAQ.astro';
+
+const features = [
+  {
+    title: "Brand Strategy",
+    description: "Develop a unique brand identity that resonates with your target audience.",
+    icon: "/images/services/icons/brand-strategy.svg"
+  },
+  {
+    title: "Content Marketing",
+    description: "Create compelling content that builds brand authority and drives engagement.",
+    icon: "/images/services/icons/content.svg"
+  },
+  {
+    title: "Brand Monitoring",
+    description: "Track and manage your brand's online reputation across all channels.",
+    icon: "/images/services/icons/monitoring.svg"
+  }
+];
+
+const process = [
+  {
+    number: 1,
+    title: "Brand Analysis",
+    description: "We analyze your current brand position and identify opportunities for growth."
+  },
+  {
+    number: 2,
+    title: "Strategy Development",
+    description: "We create a comprehensive brand strategy aligned with your business goals."
+  },
+  {
+    number: 3,
+    title: "Implementation",
+    description: "We execute the strategy across all relevant marketing channels."
+  },
+  {
+    number: 4,
+    title: "Monitoring & Optimization",
+    description: "We continuously monitor brand performance and optimize our approach."
+  }
+];
+
+const pricing = [
+  {
+    name: "Starter",
+    price: "$1,499/mo",
+    description: "For small businesses",
+    features: [
+      "Brand Strategy Development",
+      "Content Creation",
+      "Social Media Management",
+      "Monthly Reporting",
+      "Basic Brand Monitoring"
+    ]
+  },
+  {
+    name: "Growth",
+    price: "$2,999/mo",
+    description: "For growing businesses",
+    isPopular: true,
+    features: [
+      "Everything in Starter",
+      "Content Marketing",
+      "Reputation Management",
+      "Competitor Analysis",
+      "Weekly Reporting",
+      "Crisis Management"
+    ]
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    description: "For large organizations",
+    features: [
+      "Everything in Growth",
+      "Custom Brand Strategy",
+      "Advanced Analytics",
+      "Multi-channel Management",
+      "24/7 Support",
+      "Executive Reports"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "How do you measure brand success?",
+    answer: "We track key metrics including brand awareness, sentiment, engagement, share of voice, and conversion rates. We provide regular reports showing the impact of our brand marketing efforts."
+  },
+  {
+    question: "How long does it take to see results?",
+    answer: "Brand building is a long-term investment. While you may see some immediate improvements in engagement and visibility, significant brand awareness typically develops over 6-12 months of consistent effort."
+  },
+  {
+    question: "Do you handle crisis management?",
+    answer: "Yes, our team is experienced in brand protection and crisis management. We help prevent potential issues and provide rapid response when needed."
+  },
+  {
+    question: "Can you help with rebranding?",
+    answer: "Yes, we offer complete rebranding services including strategy, visual identity development, and implementation across all channels."
+  }
+];
+---
+
+<Layout 
+  title="Brand Marketing Services - TheSearchPro"
+  description="Build your brand's reputation and reach new audiences with our expert brand marketing services."
+>
+  <ServiceHero
+    title="Brand Marketing"
+    description="Build your brand's reputation and reach new audiences with our marketing expertise."
+    icon="/images/services/brand-hero.svg"
+  />
+  
+  <ServiceFeatures features={features} />
+  
+  <ServiceProcess steps={process} />
+
+  <!-- Brand Impact Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Brand Impact</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="text-4xl font-bold text-blue-600 mb-2">300%</div>
+          <p class="text-gray-600">Average Increase in Brand Visibility</p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="text-4xl font-bold text-blue-600 mb-2">89%</div>
+          <p class="text-gray-600">Improvement in Brand Sentiment</p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="text-4xl font-bold text-blue-600 mb-2">5x</div>
+          <p class="text-gray-600">Increase in Brand Engagement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <PricingTable tiers={pricing} />
+  
+  <FAQ faqs={faqs} />
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-blue-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Build Your Brand?</h2>
+      <p class="mb-8">Get your free brand analysis and consultation today!</p>
+      <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100">
+        Get Your Free Brand Analysis
+      </a>
+    </div>
+  </section>
+</Layout> 

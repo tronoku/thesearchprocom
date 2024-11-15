@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/common/ContactForm.astro';
+import { generateOrganizationSchema } from '../utils/structuredData';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact TheSearchPro",
+  "description": "Get in touch with our SEO experts for a free consultation.",
+  "mainEntity": generateOrganizationSchema()
+};
+---
+
+<Layout 
+  title="Contact TheSearchPro - Get Your Free SEO Consultation"
+  description="Contact our SEO experts for a free consultation and discover how we can help improve your website's search engine rankings."
+  schema={schema}
+>
+  <main>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 bg-gray-900 text-white">
+      <div class="max-w-6xl mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+        <p class="text-xl text-gray-300 max-w-2xl">
+          Ready to improve your search rankings? Get in touch for a free consultation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div class="text-center">
+            <h3 class="text-xl font-bold mb-2">Call Us</h3>
+            <a href="tel:+1(206)800-6382" class="text-blue-600 hover:text-blue-700">
+              (206) 800-6382
+            </a>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-bold mb-2">Email Us</h3>
+            <a href="mailto:sales@thesearchpro.com" class="text-blue-600 hover:text-blue-700">
+              sales@thesearchpro.com
+            </a>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-bold mb-2">Location</h3>
+            <p class="text-gray-600">
+              Seattle, WA 98101<br/>
+              United States
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ContactForm />
+  </main>
+</Layout> 

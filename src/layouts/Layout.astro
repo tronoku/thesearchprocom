@@ -1,0 +1,58 @@
+---
+import Navigation from '../components/layout/Navigation.astro';
+import Footer from '../components/layout/Footer.astro';
+import PageMeta from '../components/common/PageMeta.astro';
+import { generateOrganizationSchema } from '../utils/structuredData';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	schema?: object | object[];
+	type?: 'website' | 'article' | 'service';
+	publishedTime?: string;
+	modifiedTime?: string;
+}
+
+const { 
+	title, 
+	description = import.meta.env.PUBLIC_SITE_DESCRIPTION,
+	image = "/og-image.jpg",
+	schema = generateOrganizationSchema(),
+	type = "website",
+	publishedTime,
+	modifiedTime
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Material Icons -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+		
+		<PageMeta
+			title={title}
+			description={description}
+			type={type}
+			image={image}
+			path={Astro.url.pathname}
+			publishedTime={publishedTime}
+			modifiedTime={modifiedTime}
+			schema={schema}
+		/>
+	</head>
+	<body>
+		<Navigation />
+		<div class="pt-20">
+			<slot />
+		</div>
+		<Footer />
+	</body>
+</html>
