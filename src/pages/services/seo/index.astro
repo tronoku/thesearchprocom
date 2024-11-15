@@ -184,9 +184,25 @@ const service = {
     stats={results.stats}
   />
   
-  <PricingTable tiers={pricing} />
+  <section class="py-16 bg-primary">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-white">Our SEO Packages</h2>
+      <PricingTable tiers={pricing} />
+    </div>
+  </section>
   
   <FAQ faqs={faqs} />
 
-  <ServiceCTA service={service} />
+  <section class="py-16 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">{service.action}</h2>
+      <p class="mb-8">Get your free SEO analysis and discover your website's potential.</p>
+      <a 
+        href="/contact/" 
+        class="bg-white text-primary px-8 py-3 rounded-md font-semibold hover:bg-gray-100"
+      >
+        Get Your Free Analysis
+      </a>
+    </div>
+  </section>
 </Layout> 
