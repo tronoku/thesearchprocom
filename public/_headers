@@ -7,5 +7,5 @@
   Cache-Control: public, max-age=31536000, immutable
 
 # Cache other static assets
-/*.{js,css,svg}
+/*.{js,css,svg,jpg,png}
   Cache-Control: public, max-age=31536000, immutable 
