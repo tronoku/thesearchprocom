@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://tronoku.github.io',
-  base: '/your-base-path',
+  base: '/thesearchprocom',
   integrations: [tailwind()],
   server: {
     headers: {
