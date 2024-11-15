@@ -15,7 +15,7 @@ export function generateOrganizationSchema() {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+1-206-800-6382",
+      "telephone": "+1-800-513-8069", 
       "contactType": "customer service"
     },
     "sameAs": [

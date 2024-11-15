@@ -7,7 +7,7 @@ export function generateLocalBusinessSchema() {
     "image": `${import.meta.env.PUBLIC_SITE_URL}/images/logo.svg`,
     "logo": `${import.meta.env.PUBLIC_SITE_URL}/images/logo.svg`,
     "url": import.meta.env.PUBLIC_SITE_URL,
-    "telephone": "+1-206-800-6382",
+    "telephone": "+1-800-513-8069", 
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
