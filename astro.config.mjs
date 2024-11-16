@@ -8,6 +8,7 @@ export default defineConfig({
   output: 'static',
   build: {
     inlineStylesheets: 'always',
+    inlineScripts: true,
     assets: 'styles',
     format: 'directory'
   },
@@ -15,6 +16,12 @@ export default defineConfig({
     build: {
       assetsInlineLimit: 8192,
       cssCodeSplit: false,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
       rollupOptions: {
         output: {
           manualChunks(id) {
