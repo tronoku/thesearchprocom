@@ -23,50 +23,15 @@ if (!backgroundImage) {
   throw new Error('OptimizedHero: backgroundImage prop is required');
 }
 
-// Function to generate blurhash at build time
-async function generateBlurhash(imagePath: string) {
-  try {
-    if (!imagePath) {
-      throw new Error('Image path is required');
-    }
+// Default blurhash for a blue-tinted gradient
+// This represents a gentle blue gradient that works well as a placeholder
+// You can generate different defaults at https://blurha.sh
+const DEFAULT_BLURHASH = "L6PZfSi_.AyE_3t7t7R**0o#DgR4";
 
-    // Get the absolute path to the public directory
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const publicDir = path.join(__dirname, '../../../public');
-    
-    // Remove leading slash from imagePath if present
-    const normalizedImagePath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-    
-    // Construct the full path to the image
-    const fullImagePath = path.join(publicDir, normalizedImagePath);
+// Use the default blurhash instead of generating one
+const blurhash = DEFAULT_BLURHASH;
 
-    // Load image with sharp and resize to smaller dimensions for blurhash
-    const { data, info } = await sharp(fullImagePath)
-      .raw()
-      .ensureAlpha()
-      .resize(32, 32, { fit: 'inside' })
-      .toBuffer({ resolveWithObject: true });
 
-    // Convert the raw pixel data to the format blurhash expects (Uint8ClampedArray)
-    const pixels = new Uint8ClampedArray(data.buffer);
-
-    // Generate blurhash
-    const blurhash = encode(pixels, info.width, info.height, 4, 3);
-    return blurhash;
-  } catch (error) {
-    console.error('Error generating blurhash:', error);
-    console.error('Image path:', imagePath);
-    return null;
-  }
-}
-
-let blurhash = null;
-try {
-  blurhash = await generateBlurhash(backgroundImage);
-} catch (error) {
-  console.error('Failed to generate blurhash:', error);
-}
 ---
 
 <section 
