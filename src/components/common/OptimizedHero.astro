@@ -1,104 +1,102 @@
 ---
-import sharp from 'sharp';
-import { encode } from 'blurhash';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { decode } from 'blurhash';
 
 interface Props {
   title?: string;
   description?: string;
   backgroundImage: string;
   className?: string;
+  blurhash?: string;
 }
 
 const { 
   title, 
   description, 
   backgroundImage,
-  className = "" 
+  className = "",
+  blurhash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4"
 } = Astro.props;
-
-// Validate required props
-if (!backgroundImage) {
-  throw new Error('OptimizedHero: backgroundImage prop is required');
-}
-
-// Default blurhash for a blue-tinted gradient
-// This represents a gentle blue gradient that works well as a placeholder
-// You can generate different defaults at https://blurha.sh
-const DEFAULT_BLURHASH = "L6PZfSi_.AyE_3t7t7R**0o#DgR4";
-
-// Use the default blurhash instead of generating one
-const blurhash = DEFAULT_BLURHASH;
-
-
 ---
 
 <section 
-  class={`relative bg-secondary text-white py-32 ${className}`}
-  data-hero
+  class={`relative min-h-[60vh] flex items-center ${className}`}
 >
-  <div class="absolute inset-0 overflow-hidden">
-    {blurhash && (
-      <div 
-        class="absolute inset-0 blur-lg transform scale-110 transition-opacity duration-500"
-        data-blurhash={blurhash}
-        data-placeholder
-      />
-    )}
-    
-    <!-- Background div with gradient overlay -->
-    <div 
-      class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
-      style={`background-image: linear-gradient(to right, rgba(27, 80, 131, 0.95), rgba(27, 80, 131, 0.75)), url('${backgroundImage}');`}
-    />
+  <!-- Blurhash background -->
+  <div 
+    class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+    data-blurhash={blurhash}
+  >
   </div>
 
-  <div class="max-w-6xl mx-auto px-4 relative z-10">
-    <div class="max-w-3xl">
-      {title && (
-        <h1 
-          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          style={{
-            textRendering: 'optimizeLegibility',
-            WebkitFontSmoothing: 'antialiased'
-          }}
-        >
-          {title}
-        </h1>
-      )}
-      {description && (
-        <p class="text-xl text-gray-300">
-          {description}
-        </p>
-      )}
-      <slot />
-    </div>
+  <!-- Actual background image (loaded after page load) -->
+  <div 
+    class="absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-500"
+    data-bg-image={backgroundImage}
+  >
+  </div>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-900/70 to-gray-900/90"></div>
+
+  <!-- Content -->
+  <div class="relative container mx-auto px-4 py-16 text-white">
+    {title && (
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+        {title}
+      </h1>
+    )}
+    {description && (
+      <p class="text-xl text-gray-200 max-w-2xl">
+        {description}
+      </p>
+    )}
+    <slot />
   </div>
 </section>
 
 <script>
   import { decode } from 'blurhash';
 
-  // Function to render blurhash
-  function renderBlurhash(blurhash: string, width: number, height: number, canvas: HTMLCanvasElement) {
-    const pixels = decode(blurhash, width, height);
-    const ctx = canvas.getContext('2d');
-    const imageData = ctx.createImageData(width, height);
-    imageData.data.set(pixels);
-    ctx.putImageData(imageData, 0, 0);
-  }
-
-  // Find all blurhash placeholders and render them
-  document.querySelectorAll('[data-placeholder]').forEach((placeholder) => {
-    const blurhash = placeholder.getAttribute('data-blurhash');
-    if (!blurhash) return;
-
+  // Function to convert blurhash to data URL
+  function blurhashToDataURL(hash: string) {
+    const pixels = decode(hash, 32, 32);
     const canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
-    placeholder.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.createImageData(32, 32);
+    imageData.data.set(pixels);
+    ctx.putImageData(imageData, 0, 0);
+    return canvas.toDataURL('image/jpeg');
+  }
 
-    renderBlurhash(blurhash, 32, 32, canvas);
+  // Initialize blurhash backgrounds
+  document.querySelectorAll('[data-blurhash]').forEach(element => {
+    const hash = element.getAttribute('data-blurhash');
+    if (hash) {
+      const dataURL = blurhashToDataURL(hash);
+      element.style.backgroundImage = `url(${dataURL})`;
+    }
+  });
+
+  // Load hero images after page load
+  window.addEventListener('load', () => {
+    const bgElements = document.querySelectorAll('[data-bg-image]');
+    bgElements.forEach(element => {
+      const bgImage = element.getAttribute('data-bg-image');
+      if (bgImage) {
+        const img = new Image();
+        img.onload = () => {
+          element.style.backgroundImage = `url(${bgImage})`;
+          element.style.opacity = '1';
+          // Fade out blurhash
+          const blurhashEl = element.previousElementSibling;
+          if (blurhashEl) {
+            blurhashEl.style.opacity = '0';
+          }
+        };
+        img.src = bgImage;
+      }
+    });
   });
 </script> 

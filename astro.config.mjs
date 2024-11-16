@@ -7,15 +7,16 @@ export default defineConfig({
   integrations: [tailwind()],
   output: 'static',
   build: {
-    assets: '_assets',
+    assets: 'styles',
     format: 'directory'
   },
   vite: {
     build: {
       assetsInlineLimit: 4096,
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       rollupOptions: {
         output: {
+          assetFileNames: 'styles/[name][extname]',
           manualChunks: {
             'material-icons': ['@material-icons/font']
           }

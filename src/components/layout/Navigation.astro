@@ -84,33 +84,79 @@ const links = [
 
 		<!-- Mobile Menu -->
 		<div 
-			class="lg:hidden hidden bg-white shadow-lg" 
-			id="mobile-menu"
+			class="lg:hidden fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300" 
+			id="mobile-menu-overlay"
 		>
-			<nav class="px-4 py-6 space-y-4">
-				{links.map(link => (
-					<div class="space-y-2">
-						<a 
-							href={link.href}
-							class="block text-gray-600 hover:text-[rgb(56,171,241)] font-medium"
-						>
-							{link.text}
-						</a>
-						{link.children && (
-							<div class="pl-4 space-y-2">
-								{link.children.map(child => (
-									<a 
-										href={child.href}
-										class="block text-gray-600 hover:text-[rgb(56,171,241)]"
-									>
-										{child.text}
-									</a>
-								))}
-							</div>
-						)}
-					</div>
+			<div 
+				class="absolute right-0 top-0 h-full w-64 bg-white shadow-xl transform translate-x-full transition-transform duration-300"
+				id="mobile-menu-container"
+			>
+				<nav class="px-4 py-6 space-y-4">
+					{links.map(link => (
+						<div class="space-y-2">
+							<a 
+								href={link.href}
+								class="block text-gray-600 hover:text-[rgb(56,171,241)] font-medium"
+							>
+								{link.text}
+							</a>
+							{link.children && (
+								<div class="pl-4 space-y-2">
+									{link.children.map(child => (
+										<a 
+											href={child.href}
+											class="block text-gray-600 hover:text-[rgb(56,171,241)]"
+										>
+											{child.text}
+										</a>
+									))}
+								</div>
+							)}
+						</div>
 					))}
-			</nav>
+					<div class="pt-4 border-t">
+						<a 
+							href="tel:+18005138069" 
+							class="block text-secondary font-bold mb-4"
+						>
+							(800) 513-8069
+						</a>
+						<a 
+							href="/contact/"
+							class="block bg-secondary text-white px-6 py-2 rounded-md text-center hover:bg-[rgb(45,139,199)] transition-colors"
+						>
+							Free Quote
+						</a>
+					</div>
+				</nav>
+			</div>
 		</div>
 	</div>
 </header>
+
+<script>
+	const mobileMenuButton = document.getElementById('mobile-menu-button');
+	const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+	const mobileMenuContainer = document.getElementById('mobile-menu-container');
+	let isOpen = false;
+
+	function toggleMenu() {
+		isOpen = !isOpen;
+		if (mobileMenuOverlay) {
+			if (isOpen) {
+				mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+				mobileMenuContainer?.classList.remove('translate-x-full');
+			} else {
+				mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
+				mobileMenuContainer?.classList.add('translate-x-full');
+			}
+		}
+	}
+
+	mobileMenuButton?.addEventListener('click', toggleMenu);
+	mobileMenuOverlay?.addEventListener('click', (e) => {
+		if (e.target === mobileMenuOverlay) {
+			toggleMenu();
+		}
+	});
+</script>

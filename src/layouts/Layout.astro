@@ -51,50 +51,125 @@ const seoMeta = {
 	<head>
 		<!-- Google Tag Manager -->
 		<script is:inline>
-			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('consent', 'default', {
+				'analytics_storage': 'granted'
+			});
+			
+			(function(w,d,s,l,i){
+				w[l]=w[l]||[];
+				w[l].push({
+					'gtm.start': new Date().getTime(),
+					event:'gtm.js'
+				});
+				var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+				j.async=true;
+				j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+				f.parentNode.insertBefore(j,f);
 			})(window,document,'script','dataLayer','GTM-M3P7C9');
 		</script>
 		<!-- End Google Tag Manager -->
+
+		<!-- Google Analytics -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-T3KJ2SP01T', {
+				'cookie_flags': 'max-age=7200;secure;samesite=none'
+			});
+		</script>
+		<!-- End Google Analytics -->
+
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		
-		<!-- Preload critical assets -->
-		<link rel="preload" as="image" href="/images/logo.svg" />
-		<link rel="preload" as="image" href="/images/logo-white.svg" />
-		
 		<!-- Critical CSS -->
 		<style is:inline>
-			/* Add critical styles here */
+			/* Base styles */
 			body { 
 				margin: 0;
 				text-rendering: optimizeLegibility;
 				-webkit-font-smoothing: antialiased;
+				font-family: var(--font-fallback);
+				line-height: 1.5;
+				color: #1a1a1a;
 			}
-			.pt-20 { padding-top: 5rem; }
 			
-			/* Pre-connect to critical domains */
+			/* Layout utilities */
+			.pt-20 { padding-top: 5rem; }
+			.container { 
+				max-width: 80rem;
+				margin-left: auto;
+				margin-right: auto;
+				padding-left: 1rem;
+				padding-right: 1rem;
+			}
+			
+			/* Typography */
 			:root {
 				--font-fallback: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 			}
 			
-			/* Optimize text rendering */
 			h1, h2, h3 {
 				text-rendering: optimizeLegibility;
 				-webkit-font-smoothing: antialiased;
+				line-height: 1.2;
+				margin: 0;
 			}
 			
-			/* Prevent layout shifts */
+			h1 { font-size: 2.5rem; }
+			h2 { font-size: 2rem; }
+			h3 { font-size: 1.5rem; }
+			
+			/* Images */
 			img {
+				max-width: 100%;
+				height: auto;
 				aspect-ratio: attr(width) / attr(height);
 			}
 			
-			/* Optimize hero section */
+			/* Hero section */
 			.hero-section {
 				content-visibility: auto;
 				contain: layout paint;
+				min-height: 60vh;
+				display: flex;
+				align-items: center;
+				background-position: center;
+				background-size: cover;
+			}
+
+			/* Navigation styles */
+			.nav-fixed {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 50;
+				background: white;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+			}
+
+			/* Button styles */
+			.btn {
+				display: inline-block;
+				padding: 0.75rem 1.5rem;
+				font-weight: 600;
+				text-decoration: none;
+				border-radius: 0.375rem;
+				transition: background-color 0.2s;
+			}
+
+			.btn-primary {
+				background-color: #2563eb;
+				color: white;
+			}
+
+			.btn-primary:hover {
+				background-color: #1d4ed8;
 			}
 		</style>
 
@@ -111,16 +186,16 @@ const seoMeta = {
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 		<link rel="manifest" href="/site.webmanifest">
 		
-		<!-- Add preload for critical hero images -->
+		<!-- Load non-critical CSS with media query -->
 		<link 
-			rel="preload" 
-			as="image" 
-			href="/images/heroes/home.jpg" 
-			fetchpriority="high"
+			rel="stylesheet" 
+			href={import.meta.env.DEV ? '/src/styles/global.css' : '/styles/global.css'} 
+			media="print" 
+			onload="this.media='all'"
 		/>
 		
 		{/* Set security headers */}
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/maps/ https://www.googletagmanager.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com/maps/; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; worker-src 'self' blob:; upgrade-insecure-requests; block-all-mixed-content">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/maps/ https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com/maps/ https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; upgrade-insecure-requests; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com">
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
@@ -132,5 +207,10 @@ const seoMeta = {
 			<slot />
 		</div>
 		<Footer />
+
+		<!-- Fallback for CSS loading -->
+		<noscript>
+			<link rel="stylesheet" href={import.meta.env.DEV ? '/src/styles/global.css' : '/styles/global.css'}>
+		</noscript>
 	</body>
 </html>
