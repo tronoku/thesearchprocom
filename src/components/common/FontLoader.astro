@@ -1,5 +1,7 @@
 ---
-// Preload critical fonts with optimized loading
+// FontLoader component for optimized font loading
+const materialIconsUrl = "https://fonts.googleapis.com/icon?family=Material+Icons&display=block";
+const materialIconsOutlinedUrl = "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block";
 ---
 
 <Fragment>
@@ -11,14 +13,14 @@
   <link 
     rel="preload"
     as="style"
-    href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block"
+    href={materialIconsUrl}
     onload="this.onload=null;this.rel='stylesheet'"
   />
   
   <link 
     rel="preload"
     as="style"
-    href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block"
+    href={materialIconsOutlinedUrl}
     onload="this.onload=null;this.rel='stylesheet'"
   />
 
@@ -57,12 +59,12 @@
   <!-- Fallback -->
   <noscript>
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block"
+      href={materialIconsUrl}
       rel="stylesheet"
       type="text/css"
     />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=block"
+      href={materialIconsOutlinedUrl}
       rel="stylesheet"
       type="text/css"
     />
