@@ -19,33 +19,13 @@ export default defineConfig({
       minify: 'esbuild',
       rollupOptions: {
         output: {
-          inlineDynamicImports: true,
-          manualChunks(id) {
-            if (id.includes('node_modules') && id.includes('@material-icons')) {
-              return 'material-icons';
-            }
-          },
-          chunkFileNames: (chunkInfo) => {
-            if (chunkInfo.name === 'vendor') {
-              return 'styles/[name].[hash].js';
-            }
-            return 'styles/[name].[hash].js';
-          },
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.name.endsWith('.js')) {
-              return 'styles/[name].[hash].js';
-            }
-            return 'assets/[name].[hash][extname]';
+          manualChunks: {
+            'vendor': [/node_modules/],
+            'material-icons': ['@material-icons/font']
           }
         }
       },
-      target: 'es2018',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      }
+      target: 'es2018'
     },
     ssr: {
       noExternal: ['@material-icons/font']
