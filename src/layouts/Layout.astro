@@ -64,40 +64,6 @@ if (import.meta.env.PROD) {
 <!doctype html>
 <html lang="en">
 	<head>
-		<!-- Google Tag Manager -->
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('consent', 'default', {
-				'analytics_storage': 'granted'
-			});
-			
-			(function(w,d,s,l,i){
-				w[l]=w[l]||[];
-				w[l].push({
-					'gtm.start': new Date().getTime(),
-					event:'gtm.js'
-				});
-				var f=d.getElementsByTagName(s)[0],
-				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-				j.async=true;
-				j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-				f.parentNode.insertBefore(j,f);
-			})(window,document,'script','dataLayer','GTM-M3P7C9');
-		</script>
-		<!-- End Google Tag Manager -->
-
-		<!-- Google Analytics -->
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-T3KJ2SP01T', {
-				'cookie_flags': 'max-age=7200;secure;samesite=none'
-			});
-		</script>
-		<!-- End Google Analytics -->
-
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		
@@ -121,26 +87,53 @@ if (import.meta.env.PROD) {
 		
 		<!-- Set security headers -->
 		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/maps/ https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com/maps/ https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; upgrade-insecure-requests; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com">
-
-
 	</head>
 	<body>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3P7C9"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
 		<Navigation />
 		<div class="pt-20">
 			<slot />
 		</div>
 		<Footer />
 
-		<!-- Instead of trying to inline the scripts, let Astro handle them -->
-		<script>
-			// Put any critical JavaScript here that needs to run immediately
-			// For example, dark mode initialization, etc.
+		<!-- Google Tag Manager - Moved to end of body and made async -->
+		<script async is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('consent', 'default', {
+				'analytics_storage': 'granted'
+			});
+			
+			// Defer GTM loading
+			window.addEventListener('load', function() {
+				(function(w,d,s,l,i){
+					w[l]=w[l]||[];
+					w[l].push({
+						'gtm.start': new Date().getTime(),
+						event:'gtm.js'
+					});
+					var f=d.getElementsByTagName(s)[0],
+					j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+					j.async=true;
+					j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+					f.parentNode.insertBefore(j,f);
+				})(window,document,'script','dataLayer','GTM-M3P7C9');
+			});
 		</script>
 
-		<!-- Let Astro handle the hoisted scripts automatically -->
+		<!-- Google Analytics - Moved to end of body and made async -->
+		<script async is:inline>
+			window.addEventListener('load', function() {
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', 'G-T3KJ2SP01T', {
+					'cookie_flags': 'max-age=7200;secure;samesite=none'
+				});
+			});
+		</script>
+
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3P7C9"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</body>
 </html>
