@@ -17,19 +17,8 @@ const {
   blurhash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4"
 } = Astro.props;
 
-// Generate blurhash on the server
-let blurhashDataUrl = '';
-try {
-  const pixels = decode(blurhash, 32, 32);
-  const canvas = new OffscreenCanvas(32, 32);
-  const ctx = canvas.getContext('2d');
-  const imageData = ctx.createImageData(32, 32);
-  imageData.data.set(pixels);
-  ctx.putImageData(imageData, 0, 0);
-  blurhashDataUrl = canvas.convertToBlob().then(blob => URL.createObjectURL(blob));
-} catch (error) {
-  console.error('Error generating blurhash:', error);
-}
+// Don't generate blurhash on the server
+// We'll handle this entirely on the client side
 ---
 
 <section 
@@ -38,7 +27,6 @@ try {
   <!-- Blurhash background -->
   <div 
     class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
-    style={blurhashDataUrl ? `background-image: url(${blurhashDataUrl})` : ''}
     data-blurhash={blurhash}
   >
   </div>
@@ -98,7 +86,7 @@ try {
     if (hash) {
       const dataURL = await blurhashToDataURL(hash);
       if (dataURL) {
-        element.style.backgroundImage = `url(${dataURL})`;
+        (element as HTMLElement).style.backgroundImage = `url(${dataURL})`;
       }
     }
   });
@@ -118,12 +106,12 @@ try {
         
         const img = new Image();
         img.onload = () => {
-          element.style.backgroundImage = `url(${imagePath})`;
-          element.style.opacity = '1';
+          (element as HTMLElement).style.backgroundImage = `url(${imagePath})`;
+          (element as HTMLElement).style.opacity = '1';
           // Fade out blurhash
           const blurhashEl = element.previousElementSibling;
           if (blurhashEl) {
-            blurhashEl.style.opacity = '0';
+            (blurhashEl as HTMLElement).style.opacity = '0';
           }
         };
         img.src = imagePath;
