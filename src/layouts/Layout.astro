@@ -44,44 +44,19 @@ const seoMeta = {
 	siteName: SITE_NAME,
 	siteUrl: SITE_URL
 };
-
-// Update security headers with less strict CSP for canvas operations
-const securityHeaders = {
-  'Content-Security-Policy': [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/maps/ https://www.googletagmanager.com https://unpkg.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "img-src 'self' data: https: blob:",
-    "font-src 'self' https://fonts.gstatic.com",
-    "frame-src 'self' https://www.google.com/maps/",
-    "connect-src 'self'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'self'",
-    "worker-src 'self' blob:",
-    "upgrade-insecure-requests",
-    "block-all-mixed-content"
-  ].join('; ')
-};
-
-// Set security headers with proper content types
-Astro.response.headers.set('Content-Type', 'text/html; charset=utf-8');
-Astro.response.headers.set('Content-Security-Policy', securityHeaders['Content-Security-Policy']);
-Astro.response.headers.set('X-Frame-Options', 'DENY');
-Astro.response.headers.set('X-Content-Type-Options', 'nosniff');
-Astro.response.headers.set('X-XSS-Protection', '1; mode=block');
-Astro.response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<!-- Google Tag Manager -->
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-M3P7C9');</script>
+		<script is:inline>
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-M3P7C9');
+		</script>
 		<!-- End Google Tag Manager -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -143,6 +118,9 @@ Astro.response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
 			href="/images/heroes/home.jpg" 
 			fetchpriority="high"
 		/>
+		
+		{/* Set security headers */}
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/maps/ https://www.googletagmanager.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.google.com/maps/; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; worker-src 'self' blob:; upgrade-insecure-requests; block-all-mixed-content">
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
@@ -154,8 +132,5 @@ Astro.response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
 			<slot />
 		</div>
 		<Footer />
-		
-		<!-- Defer non-critical scripts -->
-		<script async defer src="https://www.googletagmanager.com/gtm.js?id=GTM-M3P7C9"></script>
 	</body>
 </html>
