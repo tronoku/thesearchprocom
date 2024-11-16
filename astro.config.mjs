@@ -16,12 +16,7 @@ export default defineConfig({
     build: {
       assetsInlineLimit: 8192,
       cssCodeSplit: false,
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-        },
-      },
+      minify: 'esbuild',
       rollupOptions: {
         output: {
           manualChunks(id) {
