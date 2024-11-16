@@ -5,6 +5,11 @@ export default defineConfig({
   site: 'https://thesearchpro.com',
   base: '',
   integrations: [tailwind()],
+  output: 'static',
+  build: {
+    assets: '_assets',
+    format: 'directory'
+  },
   vite: {
     build: {
       assetsInlineLimit: 4096,
@@ -20,25 +25,5 @@ export default defineConfig({
     ssr: {
       noExternal: ['@material-icons/font']
     }
-  },
-  headers: {
-    '/*.{js,css}': [
-      {
-        key: 'Cache-Control',
-        value: 'public, max-age=31536000, immutable'
-      }
-    ],
-    '/*.{jpg,jpeg,png,gif,webp}': [
-      {
-        key: 'Cache-Control',
-        value: 'public, max-age=31536000, immutable'
-      }
-    ],
-    '/images/heroes/*': [
-      {
-        key: 'Cache-Control',
-        value: 'public, max-age=31536000, immutable'
-      }
-    ]
   }
 });
