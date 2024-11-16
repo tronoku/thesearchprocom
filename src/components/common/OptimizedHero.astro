@@ -16,19 +16,34 @@ const {
   className = "",
   blurhash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4"
 } = Astro.props;
+
+// Generate blurhash on the server
+let blurhashDataUrl = '';
+try {
+  const pixels = decode(blurhash, 32, 32);
+  const canvas = new OffscreenCanvas(32, 32);
+  const ctx = canvas.getContext('2d');
+  const imageData = ctx.createImageData(32, 32);
+  imageData.data.set(pixels);
+  ctx.putImageData(imageData, 0, 0);
+  blurhashDataUrl = canvas.convertToBlob().then(blob => URL.createObjectURL(blob));
+} catch (error) {
+  console.error('Error generating blurhash:', error);
+}
 ---
 
 <section 
-  class={`relative min-h-[60vh] flex items-center ${className}`}
+  class={`relative h-[600px] md:h-[500px] flex items-center ${className}`}
 >
   <!-- Blurhash background -->
   <div 
     class="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+    style={blurhashDataUrl ? `background-image: url(${blurhashDataUrl})` : ''}
     data-blurhash={blurhash}
   >
   </div>
 
-  <!-- Actual background image (loaded after page load) -->
+  <!-- Actual background image (loaded after interaction) -->
   <div 
     class="absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-500"
     data-bg-image={backgroundImage}
@@ -58,36 +73,52 @@ const {
   import { decode } from 'blurhash';
 
   // Function to convert blurhash to data URL
-  function blurhashToDataURL(hash: string) {
-    const pixels = decode(hash, 32, 32);
-    const canvas = document.createElement('canvas');
-    canvas.width = 32;
-    canvas.height = 32;
-    const ctx = canvas.getContext('2d');
-    const imageData = ctx.createImageData(32, 32);
-    imageData.data.set(pixels);
-    ctx.putImageData(imageData, 0, 0);
-    return canvas.toDataURL('image/jpeg');
+  async function blurhashToDataURL(hash: string) {
+    try {
+      const pixels = decode(hash, 32, 32);
+      const canvas = document.createElement('canvas');
+      canvas.width = 32;
+      canvas.height = 32;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+      
+      const imageData = ctx.createImageData(32, 32);
+      imageData.data.set(pixels);
+      ctx.putImageData(imageData, 0, 0);
+      return canvas.toDataURL('image/jpeg');
+    } catch (error) {
+      console.error('Error generating blurhash:', error);
+      return null;
+    }
   }
 
-  // Initialize blurhash backgrounds
-  document.querySelectorAll('[data-blurhash]').forEach(element => {
+  // Initialize blurhash backgrounds immediately
+  document.querySelectorAll('[data-blurhash]').forEach(async element => {
     const hash = element.getAttribute('data-blurhash');
     if (hash) {
-      const dataURL = blurhashToDataURL(hash);
-      element.style.backgroundImage = `url(${dataURL})`;
+      const dataURL = await blurhashToDataURL(hash);
+      if (dataURL) {
+        element.style.backgroundImage = `url(${dataURL})`;
+      }
     }
   });
 
-  // Load hero images after page load
-  window.addEventListener('load', () => {
+  // Load hero images on interaction
+  let hasInteracted = false;
+  const loadImages = () => {
+    if (hasInteracted) return;
+    hasInteracted = true;
+    
     const bgElements = document.querySelectorAll('[data-bg-image]');
     bgElements.forEach(element => {
       const bgImage = element.getAttribute('data-bg-image');
       if (bgImage) {
+        // Ensure the image path starts with a forward slash
+        const imagePath = bgImage.startsWith('/') ? bgImage : `/${bgImage}`;
+        
         const img = new Image();
         img.onload = () => {
-          element.style.backgroundImage = `url(${bgImage})`;
+          element.style.backgroundImage = `url(${imagePath})`;
           element.style.opacity = '1';
           // Fade out blurhash
           const blurhashEl = element.previousElementSibling;
@@ -95,8 +126,16 @@ const {
             blurhashEl.style.opacity = '0';
           }
         };
-        img.src = bgImage;
+        img.src = imagePath;
       }
     });
+  };
+
+  // Add event listeners for user interaction
+  ['mousemove', 'scroll', 'touchstart'].forEach(event => {
+    window.addEventListener(event, loadImages, { once: true });
   });
+
+  // Fallback: Load images after 3 seconds if no interaction
+  setTimeout(loadImages, 3000);
 </script> 
