@@ -4,8 +4,9 @@ import Footer from '../components/layout/Footer.astro';
 import PageMeta from '../components/common/PageMeta.astro';
 import { generateOrganizationSchema } from '../utils/structuredData';
 import FontLoader from '../components/common/FontLoader.astro';
+import { fileURLToPath } from 'url';
+import * as path from 'path';
 import fs from 'fs/promises';
-import path from 'path';
 
 interface Props {
 	title: string;
@@ -31,7 +32,7 @@ const {
 	schema = generateOrganizationSchema()
 } = Astro.props;
 
-const path = BASE_URL.length > 1 
+const pathname = BASE_URL.length > 1 
 	? `${BASE_URL}${Astro.url.pathname}`.replace('//', '/') 
 	: Astro.url.pathname;
 
@@ -40,16 +41,24 @@ const seoMeta = {
 	description,
 	type,
 	image: `${BASE_URL}${ogImage}`,
-	path,
+	path: pathname,
 	publishedTime,
 	modifiedTime,
 	siteName: SITE_NAME,
 	siteUrl: SITE_URL
 };
 
-const criticalCSS = import.meta.env.PROD 
-  ? await fs.readFile(path.join(process.cwd(), 'dist/styles/style.css'), 'utf-8')
-  : '';
+// Only try to read CSS in production and if the file exists
+let criticalCSS = '';
+if (import.meta.env.PROD) {
+  try {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const cssPath = path.join(__dirname, '../../dist/styles/style.css');
+    criticalCSS = await fs.readFile(cssPath, 'utf-8');
+  } catch (error) {
+    console.warn('Could not load critical CSS:', error);
+  }
+}
 ---
 
 <!doctype html>
@@ -92,11 +101,11 @@ const criticalCSS = import.meta.env.PROD
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		
-		<!-- Inline critical CSS -->
-		<style is:inline>
-			{criticalCSS}
-		</style>
-
+		<!-- Inline critical CSS only if we have it -->
+		{criticalCSS && (
+			<style is:inline set:html={criticalCSS} />
+		)}
+		
 		<!-- Optimized font loading -->
 		<FontLoader />
 		
