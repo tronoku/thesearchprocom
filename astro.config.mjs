@@ -14,19 +14,36 @@ export default defineConfig({
   },
   vite: {
     build: {
-      assetsInlineLimit: 8192,
+      assetsInlineLimit: 10240,
       cssCodeSplit: false,
       minify: 'esbuild',
       rollupOptions: {
         output: {
+          inlineDynamicImports: true,
           manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-            if (id.includes('@material-icons')) {
+            if (id.includes('node_modules') && id.includes('@material-icons')) {
               return 'material-icons';
             }
+          },
+          chunkFileNames: (chunkInfo) => {
+            if (chunkInfo.name === 'vendor') {
+              return 'styles/[name].[hash].js';
+            }
+            return 'styles/[name].[hash].js';
+          },
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name.endsWith('.js')) {
+              return 'styles/[name].[hash].js';
+            }
+            return 'assets/[name].[hash][extname]';
           }
+        }
+      },
+      target: 'es2018',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
         }
       }
     },
